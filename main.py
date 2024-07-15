@@ -1,9 +1,11 @@
 import time
-from enum import Enum
+import random
 
 def main():
-    # name = opening_scene()
+    4
     difficulty, area = path_difficulty()
+    monster = monster_selection(difficulty)
+    print(monster)
 
 def opening_scene():
     name = input("Care to try again...ugh...what was your name again, friend? ")
@@ -49,6 +51,93 @@ def path_difficulty():
                 print(f"You've chosen {area}\n")
                 return chosen_difficulty, area
         print("Invalid input. Please choose again.")
+
+
+def monster_selection(difficulty):
+    enemy_map = {1: {
+                    "green slime": {
+                            "health": 2, 
+                            "attack": 1, 
+                            "defense": 0
+                        }, 
+                    "red slime": {
+                            "health": 3, 
+                            "attack": 1, 
+                            "defense": 1
+                        },
+                    "silver slime": {
+                            "health": 5, 
+                            "attack": 2, 
+                            "defense": 2
+                        },
+                    "golden slime": {
+                            "health": 10, 
+                            "attack": 3, 
+                            "defense": 3
+                        }},
+                2: {
+                    "green goblin": {
+                            "health": 7,
+                            "attack": 3,
+                            "defense": 2
+                        },
+                    "red goblin": {
+                            "health": 9,
+                            "attack": 3,
+                            "defense": 2
+                        },
+                    "silver goblin": {
+                            "health": 11,
+                            "attack": 4,
+                            "defense": 3
+                        },
+                    "golden goblin": {
+                            "health": 13,
+                            "attack": 5,
+                            "defense": 4
+                    }},
+                3: {
+                    "green orc": {
+                            "health": 15,
+                            "attack": 7,
+                            "defense": 5
+                        },
+                    "red orc": {
+                            "health": 18,
+                            "attack": 8,
+                            "defense": 7
+                        },
+                    "silver orc": {
+                            "health": 21,
+                            "attack": 10,
+                            "defense": 8
+                        },
+                    "golden orc": {
+                            "health": 30,
+                            "attack": 15,
+                            "defense": 12
+                        },
+                    }
+                }
+    monster, val = random.choice(list(enemy_map[difficulty].items()))
+    name, health, attack, defense = monster, val["health"], val["attack"], val["defense"]
+    return Monster(name, health, attack, defense)
+
+class Monster():
+    def __init__(self, name, health, attack, defense):
+        self.__name = name
+        self.__health = health
+        self.__attack = attack
+        self.__defense = defense
+
+    def get_health(self):
+        return self.__health
+    
+    def take_damage(self):
+        self.__health -= 1
+    
+    def __repr__(self):
+        return f"The {self.__name} has {self.__health} health, {self.__attack} attack, and {self.__defense} defense."
     
 if __name__ == '__main__':
     main()
