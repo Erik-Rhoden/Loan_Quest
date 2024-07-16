@@ -1,11 +1,13 @@
 import time
 
 class Hero():
-    def __init__(self, name, health, attack, defense):
+    def __init__(self, name, health, attack, defense, speed):
         self.name = name
         self.health = health
         self.attack = attack
         self.defense = defense
+        self.speed = speed
+        self.gold = 0.0
 
     def get_health(self):
         return self.health
@@ -13,14 +15,14 @@ class Hero():
     def deal_damage(self, target):
         net_damage = self.attack - target.defense
         if target.defense > self.attack:
-            return target.health
-        if net_damage > target.health:
+            target.health
+        elif net_damage > target.health:
             target.health = 0
-            return target.health
-        target.health -= net_damage
+        else:
+            target.health -= net_damage
     
     def __repr__(self):
-        return f"{self.name} has {self.health} health, {self.attack} attack, and {self.defense} defense."
+        return f"{self.name} has {self.health} health, {self.attack} attack, {self.defense} defense, and {self.speed} speed."
     
 def path_difficulty():
     difficulty_map = [
@@ -38,5 +40,5 @@ def path_difficulty():
                 chosen_difficulty = entry['LEVEL']
                 area = entry['AREA']
                 print(f"You've chosen {area}\n")
-                return chosen_difficulty, area
+                return chosen_difficulty
         print("Invalid input. Please choose again.")
