@@ -1,32 +1,62 @@
-import time
-import random
 from dialogue import *
 from monster import *
 from hero import *
 
 def main():
-    name = opening_scene()
-    difficulty, = path_difficulty()
-    monster, monster_name = monster_selection(difficulty)
-    hero = Hero(name, 5, 5, 5, 5)
-    print(battle(hero, monster))
-    
-def battle(hero, monster):
-    while hero.health > 0 and monster.health > 0:
-        if hero.speed > monster.speed:
-            hero.deal_damage(monster)
-            if monster.health > 0:
-                monster.deal_damage(hero)
-        else:
-            monster.deal_damage(hero)
-            if hero.health > 0:
-                hero.deal_damage(monster)
-    if hero.health == 0:
-        return f"{monster.name} defeated {hero.name}!"
-    return f"{hero.name} defeated {monster.name}!\nLet's see what they dropped!"
+    # name = opening_scene()
+    time = 0
+    hero = Hero("erik", 5, 5, 5, 5)
+    #give option to equip if item is equipable or go into inventory
+    def menu_selection(hero):
+        options = {
+            "t": "Travel",
+            "i": "Inventory",
+            "st": "Stats"
+        }
 
-def loot_roll():
-    pass
-    
+        locations = {
+            "s": "Shop",
+            "c": "Center of Town",
+            "e": "Edge of Town",
+            "p": "Slime Plains",
+            "g": "Goblin Forest",
+            "o": "Orc Valley"
+        }
+        
+        print(f"\nCurrent location: {hero.location}\n")
+        opt_frmt = "|--Travel-(t)| |--Inventory-(i)| |--Stats-(st)|"
+        loc_frmt = "|--Shop-(s)| |--Center of Town-(c)| |--Edge of Town-(e)| |--Slime Plains-(p)| |--Goblin Forest-(g)| |--Orc Valley-(o)|"
+
+        choice = input(f"What would you like to do next?\n{opt_frmt}\n")
+
+        if choice in options:
+            if choice == "t":
+                location_choice = input(f"Where would you like to go next?\n{loc_frmt}\n")
+                if location_choice in locations:
+                    hero.location = locations[location_choice]
+                    if location_choice in ["s", "c", "e"]:
+                        menu_selection(hero)
+                    else:
+                        difficulty = path_difficulty(hero.location)
+                        monster = monster_selection(difficulty)
+                        battle(hero, monster)
+                        if hero.health > 0:
+                            menu_selection(hero)
+                        else:
+                            print("Game Over!")
+                            return
+                else:
+                    print(f"Invalid entry. Please try again.")
+            elif choice == "i":
+                print(hero.inventory)
+                menu_selection(hero)
+            elif choice == "st":
+                print(hero.__repr__())
+        else:
+            print(f"Invalid entry. Please try again.")
+
+    while hero.health > 0:
+        menu_selection(hero)
+
 if __name__ == '__main__':
     main()

@@ -7,4 +7,4 @@
 
 * Add random text for pre-encounter
 * Add battle functionality
-* Add loot table
+* Add equipment system
