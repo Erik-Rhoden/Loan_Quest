@@ -161,11 +161,15 @@ class Hero():
                 else:
                     print("Failed to remove! Enter a valid number!")            
 
+    def slot_status(self, slot):
+        return '0' if not slot else 'X'
+
     def print_slots_status(self):
-        print("Weapon slots")
-        print(f"Main hand: {len(self.main_hand)}, Off hand: {len(self.off_hand)}")
-        print("Armor slots")
-        print(f"Chest: {len(self.chest)}, Feet: {len(self.feet)}, Legs: {len(self.legs)}, Head: {len(self.head)}, Off hand: {len(self.off_hand)}")
+        print("|-Weapon slots-|")
+        print(f"Main hand: {self.slot_status(self.main_hand)}, Off hand: {self.slot_status(self.off_hand)}")
+        print("|-Armor slots-|")
+        slots = ['chest', 'feet', 'legs', 'head']
+        print(", ".join(f"{slot.capitalize()}: {self.slot_status(getattr(self, slot))}" for slot in slots))
 
     def free_slot(self, equipped_item):
         if equipped_item.type == "Weapon":
@@ -247,7 +251,6 @@ class Hero():
         print("Item type not recognized.")
         return False
 
-        
     def slot_availability(self, item_to_equip):
         if item_to_equip.type == "Weapon" and (len(self.main_hand) == 0 or len(self.off_hand) == 0):
             if item_to_equip.two_hand:
@@ -275,7 +278,6 @@ class Hero():
                     print("Both hands have weapons.")
                     return False
         
-                
         elif item_to_equip.type == "Armor":
             if item_to_equip.body_type == "Legs":
                 if len(self.legs) == 0:
@@ -337,7 +339,7 @@ class Hero():
         self.attack -= item.defense
     
     def __repr__(self):
-        return f"{self.name} has {self.health} health, {self.attack} attack, {self.defense} defense, {self.speed} speed, and {self.gold} gold."
+        return f"Health: {self.health}\nAttack: {self.attack}\nDefense: {self.defense}\nSpeed: {self.speed}\nGold: {self.gold}"
     
 def path_difficulty(choice):
     difficulty_map = [

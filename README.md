@@ -9,6 +9,7 @@
 
 * Add random text for pre-encounter
 * Add complex battle functionality
+* Add speed system (affected by armor type/weapon type)
 * Troubleshoot equipment system
 * Add equipment system for monsters
 * Add complex menu options

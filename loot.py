@@ -685,7 +685,7 @@ class Item():
         self.value = value
 
     def __repr__(self):
-        return f"{self.name}({self.type}) worth {self.value} gold."
+        return f"{self.name}({self.type}) - Value: {self.value}"
 
 class Weapon(Item):
     def __init__(self, name, type, value, damage, two_hand=False):
@@ -694,7 +694,7 @@ class Weapon(Item):
         self.two_hand = two_hand
 
     def __repr__(self):
-        return f"{self.name}({self.type}) that does {self.damage} damage; worth {self.value} gold."
+        return f"{self.name}({self.type}) - Damage: {self.damage} - Value: {self.value}"
 
 class Armor(Item):
     def __init__(self, name, type, value, defense, body_type):
@@ -703,7 +703,7 @@ class Armor(Item):
         self.defense = defense
 
     def __repr__(self):
-        return f"{self.name}({self.type}) that has {self.defense} defense; worth {self.value} gold."
+        return f"{self.name}({self.type}) - Defense: {self.defense} - Value: {self.value}"
 
 class Potion(Item):
     def __init__(self, name, type, value, heal):
@@ -711,4 +711,4 @@ class Potion(Item):
         self.heal = heal
 
     def __repr__(self):
-        return f"{self.name}({self.type}) that has {self.heal} healing ability; worth {self.value} gold."
+        return f"{self.name}({self.type}) - Heals: {self.heal} - Value: {self.value}"
