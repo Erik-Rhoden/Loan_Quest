@@ -5,7 +5,7 @@ from hero import *
 def main():
     # name = opening_scene()
     time = 0
-    hero = Hero("erik", 5, 5, 5, 5)
+    hero = Hero("erik", 50, 50, 50, 50)
     #give option to equip if item is equipable or go into inventory
     def menu_selection(hero):
         options = {
@@ -48,8 +48,9 @@ def main():
                 else:
                     print(f"Invalid entry. Please try again.")
             elif choice == "i":
-                print(hero.inventory)
-                menu_selection(hero)
+                print("--------------")
+                hero.search_inventory()
+                print("--------------")
             elif choice == "st":
                 print(hero.__repr__())
         else:

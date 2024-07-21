@@ -90,7 +90,8 @@ class Monster():
         self.attack = attack
         self.defense = defense
         self.speed = speed
-        self.inventory = {}
+        self.gold = 0
+        self.inventory = []
         self.populate_inventory()
 
     def get_health(self):
@@ -109,31 +110,33 @@ class Monster():
         categories = ["weapon", "armor", "potion", "misc"]
         available_items = [random.choice(list(loot_map[self.name][category].items())) for category in categories]
         random.shuffle(available_items)
-        quantity = random.randint(1, 4)
+        quantity = random.randint(2, 4)
         selected_items = [item for item in available_items[:quantity] if item != ('Empty', 0)]
         for item in selected_items:
-            item_key, item_value = item
-            if isinstance(item, tuple) and isinstance(item[1], dict):
-                if 'Heal' in item_value:
-                    self.inventory[item_key] = "potion"
-                if 'Damage' in item_value:
-                    self.inventory[item_key] = "weapon"
-                    self.update_attack()
-                if 'Defense' in item_value:
-                    self.inventory[item_key] = "armor"
-                    self.update_defense()
-            else:
-                self.inventory[item_key] = "misc"
+            item_name, item_properties = item
+            if "Useless" in item_properties:
+                junk = Item(item_name, "Junk", item_properties["Value"])
+                self.inventory.append(junk)
+            elif "Gold" in item_properties:
+                self.gold += item_properties["Value"]
+                selected_items.remove(item)
+            elif "Damage" in item_properties:
+                weapon = Weapon(item_name, "Weapon", item_properties["Value"], item_properties["Damage"], item_properties["Two-Hand"])
+                self.inventory.append(weapon)
+                self.update_attack(weapon)
+            elif "Defense" in item_properties:
+                armor = Armor(item_name, "Armor", item_properties["Value"], item_properties["Defense"], item_properties["Body"])
+                self.inventory.append(armor)
+                self.update_defense(armor)
+            elif "Heal" in item_properties:
+                potion = Potion(item_name, "Potion", item_properties["Value"], item_properties["Heal"])
+                self.inventory.append(potion)
 
-    def update_attack(self):
-        for item, category in self.inventory.items():
-            if category == "weapon" and isinstance(item, dict):
-                self.attack += item['Damage']
+    def update_attack(self, weapon):
+        self.attack += weapon.damage
 
-    def update_defense(self):
-        for item, category in self.inventory.items():
-            if category == "armor" and isinstance(item, dict):
-                self.defense += item['Defense']
+    def update_defense(self, armor):
+        self.defense += armor.defense
 
     def __repr__(self):
         return f"The {self.name} has {self.health} health, {self.attack} attack, {self.defense} defense, and {self.speed} speed. {self.inventory}"
