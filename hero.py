@@ -322,7 +322,7 @@ class Hero():
         self.attack -= item.defense
     
     def __repr__(self):
-        return f"{self.name} has {self.health} health, {self.attack} attack, {self.defense} defense, and {self.speed} speed."
+        return f"{self.name} has {self.health} health, {self.attack} attack, {self.defense} defense, {self.speed} speed, and {self.gold} gold."
     
 def path_difficulty(choice):
     difficulty_map = [

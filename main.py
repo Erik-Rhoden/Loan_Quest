@@ -52,7 +52,14 @@ def main():
                 hero.search_inventory()
                 print("--------------")
             elif choice == "st":
+                print("--------------")
                 print(hero.__repr__())
+                if len(hero.equipped) == 0:
+                    print("No items equipped!")
+                else:
+                    for index, item in enumerate(hero.equipped):
+                        print(f"{index + 1}. {item}")
+                print("--------------")
         else:
             print(f"Invalid entry. Please try again.")
 
