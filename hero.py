@@ -79,7 +79,7 @@ class Hero():
         if choice.lower() == 'q':
             print("Exiting the inventory menu.")
             return
-        if choice is "e":
+        if choice == "e":
             self.equip_item()
         #add choice "d" logic here
 
@@ -89,16 +89,16 @@ class Hero():
             if isinstance(item, Weapon) or isinstance(item, Armor):
                 self.equip_list.append((index, item))
                 print(f"{len(self.equip_list)}. {item.name} ({item.type}) - {'Damage: ' + str(item.damage) if isinstance(item, Weapon) else 'Defense: ' + str(item.defense)}, Value: {item.value} gold")
+        return self.equip_list
             
     def equip_item(self):
         while True:
             print("\nThe following items are available...")
             print("--------------")
-            if not self.get_equip_list():
+            self.equip_list = self.get_equip_list()
+            if not self.equip_list:
                 print("Nothing to equip.")
                 break
-            else:
-                self.get_equip_list()
             print("--------------")
             choice = input("\nEnter the number of the item you want to equip (or 'q' to quit): ")
             if choice.lower() == 'q':
