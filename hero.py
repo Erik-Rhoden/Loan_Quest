@@ -63,6 +63,7 @@ class Hero():
     def search_inventory(self):
         if len(self.inventory) == 0:
             print("Inventory is Empty")
+            print("--------------")
             return
         for item in self.inventory:
             if isinstance(item, Weapon):
@@ -73,6 +74,7 @@ class Hero():
                 print(f"{item.name}({item.type}) - Healing: {item.heal}, Value: {item.value}")
             else:
                 print(f"{item.name}({item.type}) - Value: {item.value}")
+        print("--------------")
         choice = input("\nWould you like to equip 'e' an item, drop 'd' an item or quit 'q' selection? ")
         if choice.lower() == 'q':
             print("Exiting the inventory menu.")
@@ -92,7 +94,12 @@ class Hero():
         while True:
             print("\nThe following items are available...")
             print("--------------")
-            self.get_equip_list()
+            if not self.get_equip_list():
+                print("Nothing to equip.")
+                break
+            else:
+                self.get_equip_list()
+            print("--------------")
             choice = input("\nEnter the number of the item you want to equip (or 'q' to quit): ")
             if choice.lower() == 'q':
                 print("Exiting the equip menu.")
@@ -130,6 +137,7 @@ class Hero():
             print("--------------")
             for index, item in enumerate(self.equipped):
                 print(f"{index + 1}. {item}")
+            print("--------------")
             choice = input("\nEnter the number of the item you want to remove (or 'q' to quit): ")
             if choice.lower() == 'q':
                 print("Exiting the equip menu.")
@@ -306,7 +314,7 @@ class Hero():
                 print(f"{item_to_equip.body_type} slot is not recognized.")
                 return False
 
-        print("Item type not recognized.")
+        print("Both hands are occupied.")
         return False
         
     def add_attack(self, item):

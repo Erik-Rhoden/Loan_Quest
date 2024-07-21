@@ -110,27 +110,27 @@ class Monster():
         categories = ["weapon", "armor", "potion", "misc"]
         available_items = [random.choice(list(loot_map[self.name][category].items())) for category in categories]
         random.shuffle(available_items)
-        quantity = random.randint(2, 4)
+        quantity = random.randint(1, 4)
         selected_items = [item for item in available_items[:quantity] if item != ('Empty', 0)]
         for item in selected_items:
             item_name, item_properties = item
             if "Useless" in item_properties:
                 junk = Item(item_name, "Junk", item_properties["Value"])
                 self.inventory.append(junk)
-            elif "Gold" in item_properties:
-                self.gold += item_properties["Value"]
-                selected_items.remove(item)
-            elif "Damage" in item_properties:
+            if "Damage" in item_properties:
                 weapon = Weapon(item_name, "Weapon", item_properties["Value"], item_properties["Damage"], item_properties["Two-Hand"])
                 self.inventory.append(weapon)
                 self.update_attack(weapon)
-            elif "Defense" in item_properties:
+            if "Defense" in item_properties:
                 armor = Armor(item_name, "Armor", item_properties["Value"], item_properties["Defense"], item_properties["Body"])
                 self.inventory.append(armor)
                 self.update_defense(armor)
-            elif "Heal" in item_properties:
+            if "Heal" in item_properties:
                 potion = Potion(item_name, "Potion", item_properties["Value"], item_properties["Heal"])
                 self.inventory.append(potion)
+            if "Gold" in item_properties:
+                self.gold += item_properties["Value"]
+                selected_items.remove(item)
 
     def update_attack(self, weapon):
         self.attack += weapon.damage

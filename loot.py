@@ -467,7 +467,7 @@ loot_map = {"Green Slime": {
                                     "Two-Hand": False,
                                     "Value": 50
                             }
-                    }, "armor": {
+                    },  "armor": {
                                 "Iron Boots": {
                                     "Defense": 7,
                                     "Body": "Feet",
@@ -520,7 +520,7 @@ loot_map = {"Green Slime": {
                                     "Useless": "Junk",
                                     "Value": 20
                             }
-                        }},
+                    }},
             "Silver Orc": {
                         "weapon": {
                                 "Broadsword": {
