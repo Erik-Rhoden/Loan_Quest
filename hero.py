@@ -63,7 +63,6 @@ class Hero():
     def search_inventory(self):
         if len(self.inventory) == 0:
             print("Inventory is Empty")
-            print("--------------")
             return
         for item in self.inventory:
             if isinstance(item, Weapon):
@@ -75,12 +74,14 @@ class Hero():
             else:
                 print(f"{item.name}({item.type}) - Value: {item.value}")
         print("--------------")
-        choice = input("\nWould you like to equip 'e' an item, drop 'd' an item or quit 'q' selection? ")
+        choice = input("\nWould you like to equip 'e' an item, remove 'u' an item, drop 'd' an item or quit 'q' selection? ")
         if choice.lower() == 'q':
             print("Exiting the inventory menu.")
             return
         if choice == "e":
             self.equip_item()
+        if choice == 'u':
+            self.unequip_items()
         #add choice "d" logic here
 
     def get_equip_list(self):
@@ -131,12 +132,18 @@ class Hero():
             else:
                 print("Invalid input. Please enter a number or 'q' to quit.")
 
+    def get_equipped_list(self):
+        for index, item in enumerate(self.equipped):
+            print(f"{index + 1}. {item}")
+
     def unequip_items(self):
         while True:
             print("\nThe following items are available...")
             print("--------------")
-            for index, item in enumerate(self.equipped):
-                print(f"{index + 1}. {item}")
+            self.get_equipped_list()
+            if not self.equipped:
+                print("Nothing to remove.")
+                break
             print("--------------")
             choice = input("\nEnter the number of the item you want to remove (or 'q' to quit): ")
             if choice.lower() == 'q':
