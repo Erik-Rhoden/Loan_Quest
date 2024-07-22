@@ -23,5 +23,8 @@ def opening_scene():
     time.sleep(2)
     print("The only way to make that kind of money in a week is by adventuring!")
     time.sleep(3)
-    print("*You bring yourself to the edge of town and decide where you will go...*")
+    print("*You bring yourself to the edge of town and while deciding where to go you eye a stick...*")
+    time.sleep(2)
+    print("*You pick up the stick")
+    time.sleep(2)
     return name

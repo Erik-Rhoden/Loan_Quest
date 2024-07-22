@@ -4,8 +4,9 @@ from hero import *
 
 def main():
     # name = opening_scene()
-    time = 0
     hero = Hero("Zilharr", 50, 50, 50, 50)
+    hero.equip_item()
+    time = 0
     #give option to equip if item is equipable or go into inventory
     def menu_selection(hero):
         options = {
