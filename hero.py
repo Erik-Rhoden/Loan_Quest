@@ -1,5 +1,6 @@
 import time
 from loot import *
+from menu import menu_selection
 
 class Hero():
     def __init__(self, name, health, attack, defense, speed):
@@ -20,6 +21,7 @@ class Hero():
         self.equip_list = []
         self.equipped = []
         self.max_inv_size = 8
+        self.exit_game = False
 
     def get_health(self):
         return self.health
@@ -43,10 +45,13 @@ class Hero():
         print(f"{monster.name} dropped the following items:")
         for index, item in enumerate(monster.inventory):
             print(f"{index + 1}. {item}")
-        print(f"\nYour inventory has {self.max_inv_size - len(self.inventory)}/{self.max_inv_size} slots available.")
-        while len(self.inventory) <= self.max_inv_size and monster.inventory:
+        if self.max_inv_size - len(self.inventory) == 0:
+            self.inventory_full()
+        else:
+            print(f"\nYour inventory has {self.max_inv_size - len(self.inventory)}/{self.max_inv_size} slots available.")
+        while len(self.inventory) < self.max_inv_size and monster.inventory:
             for index, item in enumerate(monster.inventory):
-                add_to_inv = input(f"Would you like to add {item} to your inventory? (y/n): ")
+                add_to_inv = input(f"Would you like to add {item.name} to your inventory? (y/n): ")
                 if add_to_inv.lower() == "y":
                     self.inventory.append(item)
                     monster.inventory.remove(item)
@@ -56,65 +61,66 @@ class Hero():
                 else:
                     print("Invalid response. Please try again!")
             if len(self.inventory) == self.max_inv_size:
-                print("\nYour inventory is full!")
-                print("Remove items or sell them at the Shop!")
-                break
-            
-    def search_inventory(self):
-        while True:
-            if not self.inventory:
-                if self.equipped:
-                    print("|--Equipped Items--|")
-                    self.get_equipped_list()
-                    self.inventory_options()
-                elif not self.equipped:
-                    print("Inventory is empty and nothing equipped")
-                    break
-            else:
-                self.inventory_options()
-                break
+                if monster.inventory:
+                    self.inventory_full()
+                    choice = input("Would you like to remove an item? (y/n): ")
+                    if choice == "y":
+                        self.remove_items()
+                    if choice == "n":
+                        break
+                else:
+                    self.inventory_full()
+
+    def inventory_full(self):
+        print("--------------\n")
+        print("\nYour inventory is full!")
+        print("Remove items or sell them at the Shop!")
+        print("--------------\n")
 
     def inventory_options(self):
-        print("|--Inventory--|")
-        for item in self.inventory:
-            if isinstance(item, Weapon):
-                print(f"{item.name}({item.type}) - Damage: {item.damage}, Value: {item.value}")
-            elif isinstance(item, Armor):
-                print(f"{item.name}({item.type}) - Defense: {item.defense}, Value: {item.value}")
-            elif isinstance(item, Potion):
-                print(f"{item.name}({item.type}) - Healing: {item.heal}, Value: {item.value}")
+        while True:
+            if self.equipped:
+                print("|--Equipped Items--|")
+                self.get_equipped_list()
+                print("--------------\n")
+            print("|--Inventory--|")
+            if not self.inventory:
+                print("(Empty)")
             else:
-                print(f"{item.name}({item.type}) - Value: {item.value}")
-        print("--------------")
-        choice = input("\nWould you like to equip 'e' an item, unequip 'u' equipment, drop 'd' an item or quit 'q' selection? ")
-        if choice.lower() == 'q':
-            print("Exiting the inventory menu.\n")
-            return
-        elif choice == "e":
-            self.equip_item()
-        elif choice == 'u':
-            self.unequip_items()
-        elif choice == 'd':
-            self.remove_items()
+                self.get_inventory_list()
+            print("--------------")
+            choice = input("\nWould you like to equip 'e' an item, unequip 'u' equipment, drop 'd' an item or quit 'q' selection? ").lower()
+            if choice == 'q':
+                print("--------------")
+                print("Returning to the main menu.")
+                break
+            elif choice == "e":
+                self.equip_item()
+            elif choice == 'u':
+                self.unequip_items()
+            elif choice == 'd':
+                self.remove_items()
 
     def remove_items(self):
         while True:
             print("\nThe following items are available to be removed...")
             print("--------------")
-            self.inventory_list = self.get_inventory_list()
-            if not self.inventory_list:
+            if not self.inventory:
                 print("Nothing to remove.")
+                print("--------------\n")
                 break
+            self.get_inventory_list()
             print("--------------")
             choice = input("\nEnter the number of the item you want to remove (or 'q' to quit): ")
             if choice.lower() == 'q':
                 print("\nExiting the remove menu.\n")
+                print("--------------")
                 break
             if choice.isdigit():
                 choice = int(choice)
-                if 1 <= choice <= len(self.inventory_list):
-                    index, item_to_remove = self.inventory_list[choice - 1]
-                    self.inventory.pop(index)
+                if 1 <= choice <= len(self.inventory):
+                    item_to_remove = self.inventory[choice - 1]
+                    self.inventory.remove(item_to_remove)
                     print(f"Removed {item_to_remove.name}.")
                 else:
                     print("--------------")
@@ -131,7 +137,6 @@ class Hero():
                 print(f"{len(self.inventory_list)}. {item.name} ({item.type}) - {'Damage: ' + str(item.damage) if isinstance(item, Weapon) else 'Defense: ' + str(item.defense)}, Value: {item.value} gold")
             elif isinstance(item, Item):
                 print(f"{len(self.inventory_list)}. {item.name} ({item.type}) - 'Value': {item.value} gold")
-        return self.inventory_list
 
     def get_equip_list(self):
         self.equip_list = []
@@ -146,9 +151,12 @@ class Hero():
             print("\nThe following items are available...")
             print("--------------")
             self.equip_list = self.get_equip_list()
+            if self.equip_list:
+                print("--------------")
             if not self.equip_list:
                 print("Nothing to equip.")
                 print("--------------")
+                break
             choice = input("\nEnter the number of the item you want to equip (or 'q' to quit): ")
             if choice.lower() == 'q':
                 print("Exiting the equip menu.")
@@ -161,7 +169,9 @@ class Hero():
                         self.equipped.append(item_to_equip)
                         self.inventory.pop(index)
                         self.equip_list.pop(choice - 1)
+                        print("--------------")
                         self.print_slots_status()
+                        print("--------------")
                     else:
                         print(f"{item_to_equip.name} failed to equip! Equipment slot is full!")
                         while True:
@@ -194,19 +204,25 @@ class Hero():
             if choice.lower() == 'q':
                 print("Exiting the equip menu.")
                 break
-            if choice.isdigit():
-                choice = int(choice)
-                if 1 <= choice <= len(self.equipped):
-                    equipped_item = self.equipped[choice - 1]
-                    self.free_slot(equipped_item)
-                    self.equipped.remove(equipped_item)
-                    self.inventory.append(equipped_item)
-                    self.print_slots_status()
-                else:
-                    print("Failed to remove! Enter a valid number!")            
+            if len(self.inventory) < self.max_inv_size:
+                if choice.isdigit():
+                    choice = int(choice)
+                    if 1 <= choice <= len(self.equipped):
+                        equipped_item = self.equipped[choice - 1]
+                        self.free_slot(equipped_item)
+                        self.equipped.remove(equipped_item)
+                        self.inventory.append(equipped_item)
+                        self.print_slots_status()
+                    else:
+                        print("Failed to remove! Enter a valid number!")
+            else:
+                print("--------------")
+                print("Inventory is full! You must drop an item first!")
+                print("--------------")     
+                break
 
     def slot_status(self, slot):
-        return '0' if not slot else 'X'
+        return 'Open' if not slot else 'X'
 
     def print_slots_status(self):
         print("|-Weapon slots-|")
@@ -251,31 +267,32 @@ class Hero():
             self.decrease_defense(equipped_item)
 
     def slot_availability(self, item_to_equip):
-        if item_to_equip.type == "Weapon" and (len(self.main_hand) == 0 or len(self.off_hand) == 0):
-            if item_to_equip.two_hand:
-                if len(self.main_hand) == 0 and len(self.off_hand) == 0:
-                    self.main_hand.append(item_to_equip)
-                    self.off_hand.append(item_to_equip)
-                    self.add_attack(item_to_equip)
-                    print(f"{item_to_equip} equipped")
-                    return True
+        if item_to_equip.type == "Weapon":
+            if (len(self.main_hand) == 0 or len(self.off_hand) == 0):
+                if item_to_equip.two_hand:
+                    if len(self.main_hand) == 0 and len(self.off_hand) == 0:
+                        self.main_hand.append(item_to_equip)
+                        self.off_hand.append(item_to_equip)
+                        self.add_attack(item_to_equip)
+                        print(f"{item_to_equip} equipped")
+                        return True
+                    else:
+                        print("Cannot equip a two-handed weapon unless both hands are free.")
+                        return False
                 else:
-                    print("Cannot equip a two-handed weapon unless both hands are free.")
-                    return False
-            else:
-                if len(self.main_hand) == 0:
-                    self.main_hand.append(item_to_equip)
-                    self.add_attack(item_to_equip)
-                    print(f"{item_to_equip} equipped")
-                    return True
-                elif len(self.off_hand) == 0:
-                    self.off_hand.append(item_to_equip)
-                    self.add_attack(item_to_equip)
-                    print(f"{item_to_equip} equipped")
-                    return True
-                else:
-                    print("Both hands have weapons.")
-                    return False
+                    if len(self.main_hand) == 0:
+                        self.main_hand.append(item_to_equip)
+                        self.add_attack(item_to_equip)
+                        print(f"{item_to_equip} equipped")
+                        return True
+                    elif len(self.off_hand) == 0:
+                        self.off_hand.append(item_to_equip)
+                        self.add_attack(item_to_equip)
+                        print(f"{item_to_equip} equipped")
+                        return True
+                    else:
+                        print("Both hands have weapons.")
+                        return False
         
         elif item_to_equip.type == "Armor":
             if item_to_equip.body_type == "Legs":
@@ -341,35 +358,3 @@ class Hero():
     
     def __repr__(self):
         return f"Health: {self.health}\nAttack: {self.attack}\nDefense: {self.defense}\nSpeed: {self.speed}\nGold: {self.gold}"
-    
-def path_difficulty(choice):
-    difficulty_map = [
-        {'LEVEL': 1, 'AREA': "Slime Plains"},
-        {'LEVEL': 2, 'AREA': "Goblin Forest"},
-        {'LEVEL': 3, 'AREA': "Orc Valley"}
-    ]
-        
-    while True:
-        for entry in difficulty_map:
-            if choice == entry['AREA']:
-                chosen_difficulty = entry['LEVEL']
-                area = entry['AREA']
-                print(f"You've chosen {area}\n")
-                return chosen_difficulty
-        print("Invalid input. Please choose again.")
-
-def battle(hero, monster):
-    while hero.health > 0 and monster.health > 0:
-        if hero.speed > monster.speed:
-            hero.deal_damage(monster)
-            if monster.health > 0:
-                monster.deal_damage(hero)
-        else:
-            monster.deal_damage(hero)
-            if hero.health > 0:
-                hero.deal_damage(monster)
-    if hero.health == 0:
-        print(f"{monster.name} defeated {hero.name}!")
-        return
-    else:
-        hero.get_loot(monster)

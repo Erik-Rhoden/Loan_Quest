@@ -25,6 +25,6 @@ def opening_scene():
     time.sleep(3)
     print("*You bring yourself to the edge of town and while deciding where to go you eye a stick...*")
     time.sleep(2)
-    print("*You pick up the stick")
+    print("*You pick up the stick*")
     time.sleep(2)
     return name
