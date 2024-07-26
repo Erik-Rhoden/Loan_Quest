@@ -274,6 +274,7 @@ class Hero():
                         self.main_hand.append(item_to_equip)
                         self.off_hand.append(item_to_equip)
                         self.add_attack(item_to_equip)
+                        self.update_speed(item_to_equip)
                         print(f"{item_to_equip} equipped")
                         return True
                     else:
@@ -283,11 +284,13 @@ class Hero():
                     if len(self.main_hand) == 0:
                         self.main_hand.append(item_to_equip)
                         self.add_attack(item_to_equip)
+                        self.update_speed(item_to_equip)
                         print(f"{item_to_equip} equipped")
                         return True
                     elif len(self.off_hand) == 0:
                         self.off_hand.append(item_to_equip)
                         self.add_attack(item_to_equip)
+                        self.update_speed(item_to_equip)
                         print(f"{item_to_equip} equipped")
                         return True
                     else:
@@ -299,6 +302,7 @@ class Hero():
                 if len(self.legs) == 0:
                     self.legs.append(item_to_equip)
                     self.add_defense(item_to_equip)
+                    self.update_speed(item_to_equip)
                     print(f"{item_to_equip} equipped")
                     return True
                 else:
@@ -308,6 +312,7 @@ class Hero():
                 if len(self.head) == 0:
                     self.head.append(item_to_equip)
                     self.add_defense(item_to_equip)
+                    self.update_speed(item_to_equip)
                     print(f"{item_to_equip} equipped")
                     return True
                 else:
@@ -317,6 +322,7 @@ class Hero():
                 if len(self.feet) == 0:
                     self.feet.append(item_to_equip)
                     self.add_defense(item_to_equip)
+                    self.update_speed(item_to_equip)
                     print(f"{item_to_equip} equipped")
                     return True
                 else:
@@ -326,6 +332,7 @@ class Hero():
                 if len(self.chest) == 0:
                     self.chest.append(item_to_equip)
                     self.add_defense(item_to_equip)
+                    self.update_speed(item_to_equip)
                     print(f"{item_to_equip} equipped")
                     return True
                 else:
@@ -335,6 +342,7 @@ class Hero():
                 if len(self.off_hand) == 0:
                     self.off_hand.append(item_to_equip)
                     self.add_defense(item_to_equip)
+                    self.update_speed(item_to_equip)
                     print(f"{item_to_equip} equipped")
                     return True
                 else:
@@ -355,6 +363,9 @@ class Hero():
 
     def decrease_defense(self, item):
         self.defense -= item.defense
+
+    def update_speed(self, item):
+        self.speed += item.speed
     
     def __repr__(self):
         return f"Health: {self.health}\nAttack: {self.attack}\nDefense: {self.defense}\nSpeed: {self.speed}\nGold: {self.gold}"

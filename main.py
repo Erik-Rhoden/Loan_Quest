@@ -5,7 +5,7 @@ from menu import menu_selection
 
 def main():
     # name = opening_scene()
-    hero = Hero("Zilharr", 50, 50, 50, 50)
+    hero = Hero("Zilharr", 5, 5, 5, 5)
     hero.equip_item()
     game_running = True
     time = 0

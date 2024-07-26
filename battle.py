@@ -1,5 +1,3 @@
-
-
 def path_difficulty(choice):
     difficulty_map = [
         {'LEVEL': 1, 'AREA': "Slime Plains"},
@@ -22,7 +20,7 @@ def battle(hero, monster):
             hero.deal_damage(monster)
             if monster.health > 0:
                 monster.deal_damage(hero)
-        else:
+        if monster.speed > hero.speed:
             monster.deal_damage(hero)
             if hero.health > 0:
                 hero.deal_damage(monster)

@@ -118,11 +118,13 @@ loot_map = {"Green Slime": {
                         "weapon": {
                                 "Empty" : 0,
                                 "Club": {
-                                    "Damage": 2,
+                                    "Damage": 3,
+                                    "Speed": 0,
                                     "Two-Hand": False,
                                     "Value": 3
                             },  "Dagger": {
                                     "Damage": 5,
+                                    "Speed": 4,
                                     "Two-Hand": False,
                                     "Value": 5
                             }
@@ -130,14 +132,17 @@ loot_map = {"Green Slime": {
                                 "Empty": 0,
                                 "Leather Shoes": {
                                     "Defense": 1,
+                                    "Speed": 2,
                                     "Body": "Feet",
                                     "Value": 3
                             },  "Wool Shirt": {
                                     "Defense": 1,
+                                    "Speed": 4,
                                     "Body": "Chest",
                                     "Value": 2
                             },  "Wooden Shield": {
                                     "Defense": 8,
+                                    "Speed": 2,
                                     "Body": "Off-Hand",
                                     "Value": 5
                             }
@@ -172,15 +177,18 @@ loot_map = {"Green Slime": {
                         "weapon": {
                                 "Empty" : 0,
                                 "Club": {
-                                    "Damage": 2,
+                                    "Damage": 3,
+                                    "Speed": 0,
                                     "Two-Hand": False,
                                     "Value": 3
                             },  "Dagger": {
                                     "Damage": 5,
+                                    "Speed": 4,
                                     "Two-Hand": False,
                                     "Value": 5
                             },  "Shortsword": {
                                     "Damage": 10,
+                                    "Speed": 2,
                                     "Two-Hand": False,
                                     "Value": 8
                             }
@@ -188,22 +196,27 @@ loot_map = {"Green Slime": {
                                 "Empty": 0,
                                 "Leather Shoes": {
                                     "Defense": 1,
+                                    "Speed": 2,
                                     "Body": "Feet",
                                     "Value": 3
                             },  "Wool Shirt": {
                                     "Defense": 1,
+                                    "Speed": 4,
                                     "Body": "Chest",
                                     "Value": 2
                             },  "Leather Chest": {
                                     "Defense": 4,
+                                    "Speed": 2,
                                     "Body": "Chest",
                                     "Value": 10
                             },  "Leather Pants": {
                                     "Defense": 4,
+                                    "Speed": 2,
                                     "Body": "Legs",
                                     "Value": 10
                             },  "Wooden Shield": {
                                     "Defense": 8,
+                                    "Speed": 2,
                                     "Body": "Off-Hand",
                                     "Value": 5
                             }
@@ -239,41 +252,50 @@ loot_map = {"Green Slime": {
             "Silver Goblin": {
                         "weapon": {
                                 "Club": {
-                                    "Damage": 2,
+                                    "Damage": 3,
+                                    "Speed": 0,
                                     "Two-Hand": False,
                                     "Value": 3
                             },  "Dagger": {
                                     "Damage": 5,
+                                    "Speed": 4,
                                     "Two-Hand": False,
                                     "Value": 5
                             },  "Shortsword": {
                                     "Damage": 10,
+                                    "Speed": 2,
                                     "Two-Hand": False,
                                     "Value": 8
                             },  "Broadsword": {
                                     "Damage": 15,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 30
                             }
                     }, "armor": {
                                 "Leather Shoes": {
                                     "Defense": 1,
+                                    "Speed": 2,
                                     "Body": "Feet",
                                     "Value": 3
                             },  "Leather Pants": {
                                     "Defense": 4,
+                                    "Speed": 2,
                                     "Body": "Legs",
                                     "Value": 10
                             },  "Leather Chest": {
                                     "Defense": 4,
+                                    "Speed": 2,
                                     "Body": "Chest",
                                     "Value": 10
                             },  "Iron Helm": {
                                     "Defense": 8,
+                                    "Speed": -2,
                                     "Body": "Head",
                                     "Value": 20
                             },  "Wooden Shield": {
                                     "Defense": 8,
+                                    "Speed": 2,
                                     "Body": "Off-Hand",
                                     "Value": 5
                             }
@@ -310,44 +332,54 @@ loot_map = {"Green Slime": {
                         "weapon": {
                                 "Shortsword": {
                                     "Damage": 10,
+                                    "Speed": 2,
                                     "Two-Hand": False,
                                     "Value": 8
                             },  "Broadsword": {
                                     "Damage": 15,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 30
                             },  "Longsword": {
                                     "Damage": 20,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 50
                             }
                     },  "armor": {
                                 "Leather Shoes": {
                                     "Defense": 1,
+                                    "Speed": 2,
                                     "Body": "Feet",
                                     "Value": 3
                             },  "Leather Pants": {
                                     "Defense": 4,
+                                    "Speed": 2,
                                     "Body": "Legs",
                                     "Value": 10
                             },  "Leather Chest": {
                                     "Defense": 4,
+                                    "Speed": 2,
                                     "Body": "Chest",
                                     "Value": 10
                             },  "Iron Boots": {
                                     "Defense": 7,
+                                    "Speed": -2,
                                     "Body": "Feet",
                                     "Value": 15
                             },  "Iron Helm": {
                                     "Defense": 8,
+                                    "Speed": -2,
                                     "Body": "Head",
                                     "Value": 20
                             },  "Iron Chest": {
                                     "Defense": 15,
+                                    "Speed": -4,
                                     "Body": "Chest",
                                     "Value": 50
                             },  "Iron Shield": {
                                     "Defense": 20,
+                                    "Speed": -5,
                                     "Body": "Off-Hand",
                                     "Value": 30
                             }
@@ -387,36 +419,44 @@ loot_map = {"Green Slime": {
                         "weapon": {
                                 "Broadsword": {
                                     "Damage": 15,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 30
                             },  "Shortsword": {
                                     "Damage": 10,
+                                    "Speed": 2,
                                     "Two-Hand": False,
                                     "Value": 8
                             },  "Longsword": {
                                     "Damage": 20,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 50
                             }
                     }, "armor": {
                                 "Iron Boots": {
                                     "Defense": 7,
+                                    "Speed": -2,
                                     "Body": "Feet",
                                     "Value": 15
                             },  "Iron Leggings": {
                                     "Defense": 10,
+                                    "Speed": -4,
                                     "Body": "Legs",
                                     "Value": 30
                             },  "Iron Chest": {
                                     "Defense": 15,
+                                    "Speed": -4,
                                     "Body": "Chest",
                                     "Value": 50
                             },  "Iron Helm": {
                                     "Defense": 8,
+                                    "Speed": -2,
                                     "Body": "Head",
                                     "Value": 20
                             },  "Iron Shield": {
                                     "Defense": 20,
+                                    "Speed": -5,
                                     "Body": "Off-Hand",
                                     "Value": 30
                             }
@@ -456,36 +496,44 @@ loot_map = {"Green Slime": {
                         "weapon": {
                                 "Broadsword": {
                                     "Damage": 15,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 30
                             },  "Shortsword": {
                                     "Damage": 10,
+                                    "Speed": 2,
                                     "Two-Hand": False,
                                     "Value": 8
                             },  "Longsword": {
                                     "Damage": 20,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 50
                             }
                     },  "armor": {
                                 "Iron Boots": {
                                     "Defense": 7,
+                                    "Speed": -2,
                                     "Body": "Feet",
                                     "Value": 15
                             },  "Iron Leggings": {
                                     "Defense": 10,
+                                    "Speed": -4,
                                     "Body": "Legs",
                                     "Value": 30
                             },  "Iron Chest": {
                                     "Defense": 15,
+                                    "Speed": -4,
                                     "Body": "Chest",
                                     "Value": 50
                             },  "Iron Helm": {
                                     "Defense": 8,
+                                    "Speed": -2,
                                     "Body": "Head",
                                     "Value": 20
                             },  "Iron Shield": {
                                     "Defense": 20,
+                                    "Speed": -5,
                                     "Body": "Off-Hand",
                                     "Value": 30
                             }
@@ -525,40 +573,49 @@ loot_map = {"Green Slime": {
                         "weapon": {
                                 "Broadsword": {
                                     "Damage": 15,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 30
                             },  "Shortsword": {
                                     "Damage": 10,
+                                    "Speed": 2,
                                     "Two-Hand": False,
                                     "Value": 8
                             },  "Longsword": {
                                     "Damage": 20,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 50
                             }
                     }, "armor": {
                                 "Iron Boots": {
                                     "Defense": 7,
+                                    "Speed": -2,
                                     "Body": "Feet",
                                     "Value": 15
                             },  "Iron Leggings": {
                                     "Defense": 10,
+                                    "Speed": -4,
                                     "Body": "Legs",
                                     "Value": 30
                             },  "Iron Chest": {
                                     "Defense": 15,
+                                    "Speed": -4,
                                     "Body": "Chest",
                                     "Value": 50
                             },  "Iron Helm": {
                                     "Defense": 8,
+                                    "Speed": -2,
                                     "Body": "Head",
                                     "Value": 20
                             },  "Steel Shield": {
                                     "Defense": 35,
+                                    "Speed": -10,
                                     "Body": "Off-Hand",
                                     "Value": 100
                             },  "Iron Shield": {
                                     "Defense": 20,
+                                    "Speed": -5,
                                     "Body": "Off-Hand",
                                     "Value": 30
                             }
@@ -598,52 +655,64 @@ loot_map = {"Green Slime": {
                         "weapon": {
                                 "Broadsword": {
                                     "Damage": 15,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 30
                             },  "Greatsword": {
                                     "Damage": 40,
+                                    "Speed": -6,
                                     "Two-Hand": True,
                                     "Value": 100
                             },  "Longsword": {
                                     "Damage": 20,
+                                    "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 50
                             }
                     },  "armor": {
                                 "Iron Boots": {
                                     "Defense": 7,
+                                    "Speed": -2,
                                     "Body": "Feet",
                                     "Value": 15
                             },  "Iron Leggings": {
                                     "Defense": 10,
+                                    "Speed": -4,
                                     "Body": "Legs",
                                     "Value": 30
                             },  "Iron Chest": {
                                     "Defense": 15,
+                                    "Speed": -4,
                                     "Body": "Chest",
                                     "Value": 50
                             },  "Iron Helm": {
                                     "Defense": 8,
+                                    "Speed": -2,
                                     "Body": "Head",
                                     "Value": 20
                             },  "Steel Shield": {
                                     "Defense": 35,
+                                    "Speed": -10,
                                     "Body": "Off-Hand",
                                     "Value": 100
                             },  "Steel Helm": {
                                     "Defense": 15,
+                                    "Speed": -4,
                                     "Body": "Head",
                                     "Value": 40
                             },  "Steel Boots": {
                                     "Defense": 15,
+                                    "Speed": -4,
                                     "Body": "Feet",
                                     "Value": 30
                             },  "Steel Leggings": {
                                     "Defense": 20,
+                                    "Speed": -8,
                                     "Body": "Legs",
                                     "Value": 60
                             },  "Steel Chest": {
                                     "Defense": 30,
+                                    "Speed": -8,
                                     "Body": "Chest",
                                     "Value": 100
                             }
@@ -688,18 +757,20 @@ class Item():
         return f"{self.name}({self.type}) - Value: {self.value}"
 
 class Weapon(Item):
-    def __init__(self, name, type, value, damage, two_hand=False):
+    def __init__(self, name, type, value, damage, speed, two_hand=False):
         super().__init__(name, type, value)
         self.damage = damage
+        self.speed = speed
         self.two_hand = two_hand
 
     def __repr__(self):
         return f"{self.name}({self.type}) - Damage: {self.damage} - Value: {self.value}"
 
 class Armor(Item):
-    def __init__(self, name, type, value, defense, body_type):
+    def __init__(self, name, type, value, defense, speed, body_type):
         super().__init__(name, type, value)
         self.body_type = body_type
+        self.speed = speed
         self.defense = defense
 
     def __repr__(self):

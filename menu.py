@@ -5,7 +5,7 @@ def menu_selection(hero):
     while True:
         if hero.exit_game:
             break
-        
+
         print("\n--------------")
         print(f"Current location: {hero.location}\n")
         opt_frmt = "|--Travel-(t)| |--Inventory-(i)| |--Stats-(st)| |--Exit-(x)|"
@@ -52,7 +52,7 @@ def travel(hero):
                 menu_selection(hero)
             else:
                 print("Game Over!")
-                return
+                hero.exit_game = True
     else:
         print(f"Invalid entry. Please try again.")
 
