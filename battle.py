@@ -24,8 +24,8 @@ def battle(hero, monster):
             monster.deal_damage(hero)
             if hero.health > 0:
                 hero.deal_damage(monster)
-    if hero.health == 0:
+    if hero.health <= 0:
         print(f"{monster.name} defeated {hero.name}!")
-        return
+        hero.exit_game = True
     else:
         hero.get_loot(monster)

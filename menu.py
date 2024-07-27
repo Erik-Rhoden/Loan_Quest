@@ -55,6 +55,8 @@ def travel(hero):
                 monster = monster_selection(difficulty)
                 if hero.health > 0:
                     battle(hero, monster)
+                    if hero.exit_game:
+                        break
                     print("--------------\n")
                 else:
                     print("Game Over!")
