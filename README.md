@@ -7,13 +7,11 @@
 ## To-Do
 ### (Non-Exhaustive)
 
-1. Add Shop
-2. Add random flavor text for pre-encounter
-3. Add complex menu options
+1. Add complex battle functionality
+2. Add hero leveling system
+3. Add random flavor text for pre-encounter
 4. Add basic manual
 5. Add equipment system for monsters
-6. Add hero leveling system
-7. Add complex battle functionality
 
 ## Completed
 
@@ -26,3 +24,5 @@
 * Added difficulty-based locations
 * Added monster table (potential enemies)
 * Add speed system (affected by armor type/weapon type)
+* Add Shop
+* Add complex menu options

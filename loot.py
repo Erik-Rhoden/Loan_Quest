@@ -10,19 +10,19 @@ loot_map = {"Green Slime": {
                     },  "misc": {
                                 "Tattered Cloth": {
                                     "Useless": "Junk",
-                                    "Value": 0.1,
+                                    "Value": 0.2,
                             },  "Animal Bones": {
                                     "Useless": "Junk",
                                     "Value": 0.2
                             },  "Slime Residue": {
                                     "Useless": "Junk",
-                                    "Value": 0.1
+                                    "Value": 0.2
                             },  "A Gold Piece": {
                                     "Gold": "Money",
                                     "Value": 1
                             },  "Human Skull": {
                                     "Useless": "Junk",
-                                    "Value": 0.5
+                                    "Value": 0.6
                             }
                     }},
             "Red Slime": {
@@ -38,13 +38,13 @@ loot_map = {"Green Slime": {
                                     "Value": 0.2
                             },  "Slime Residue": {
                                     "Useless": "Junk",
-                                    "Value": 0.1,
+                                    "Value": 0.2,
                             },  "A Gold Piece": {
                                     "Gold": "Money",
                                     "Value": 1,
                             },  "Human Skull": {
                                     "Useless": "Junk",
-                                    "Value": 0.5
+                                    "Value": 0.6
                             },  "Shattered Dagger": {
                                     "Useless": "Junk",
                                     "Value": 2
@@ -64,13 +64,13 @@ loot_map = {"Green Slime": {
                     },  "misc": {
                                 "Slime Residue": {
                                     "Useless": "Junk",
-                                    "Value": 0.1
+                                    "Value": 0.2
                             },  "A Gold Piece": {
                                     "Gold": "Money",
                                     "Value": 1,
                             },  "Human Skull": {
                                     "Useless": "Junk",
-                                    "Value": 0.5
+                                    "Value": 0.6
                             },  "Shattered Dagger": {
                                     "Useless": "Junk",
                                     "Value": 2
@@ -102,7 +102,7 @@ loot_map = {"Green Slime": {
                                     "Value": 1
                             },  "Human Skull": {
                                     "Useless": "Junk",
-                                    "Value": 0.5
+                                    "Value": 0.6
                             },  "Shattered Dagger": {
                                     "Useless": "Junk",
                                     "Value": 2

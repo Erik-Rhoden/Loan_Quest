@@ -15,8 +15,9 @@ class Hero():
         self.legs = []
         self.feet = []
         self.chest = []
+        self.backpack = []
         self.location = "Center of Town"
-        self.gold = 50
+        self.gold = 0.0
         self.inventory = [Weapon("Stick", "Weapon", 0, 2, False)]
         self.equip_list = []
         self.equipped = []
@@ -36,6 +37,7 @@ class Hero():
             target.health -= net_damage
 
     def get_loot(self, monster):
+        print("--------------")
         print(f"You defeated {monster.name}!\n")
         if not monster.inventory:
             print(f"Too bad! The {monster.name} had nothing!")
@@ -144,6 +146,9 @@ class Hero():
             if isinstance(item, Weapon) or isinstance(item, Armor):
                 self.equip_list.append((index, item))
                 print(f"{len(self.equip_list)}. {item.name} ({item.type}) - {'Damage: ' + str(item.damage) if isinstance(item, Weapon) else 'Defense: ' + str(item.defense)}, Value: {item.value} gold")
+            if isinstance(item, Item) and item.type == 'Backpack':
+                self.equip_list.append((index, item))
+                print(f"{len(self.equip_list)}. {item.name} ({item.type}) - {'Capacity: ' + str(item.capacity)}, Value: {item.value} gold")
         return self.equip_list
             
     def equip_item(self):
@@ -228,7 +233,7 @@ class Hero():
         print("|-Weapon slots-|")
         print(f"Main hand: {self.slot_status(self.main_hand)}, Off hand: {self.slot_status(self.off_hand)}")
         print("|-Armor slots-|")
-        slots = ['chest', 'feet', 'legs', 'head']
+        slots = ['chest', 'feet', 'legs', 'head', 'backpack']
         print(", ".join(f"{slot.capitalize()}: {self.slot_status(getattr(self, slot))}" for slot in slots))
 
     def free_slot(self, equipped_item):
@@ -348,6 +353,13 @@ class Hero():
                 else:
                     print("Off-Hand slot is already occupied.")
                     return False
+                
+        elif item_to_equip.type == "Backpack":
+            if len(self.backpack) == 0:
+                self.backpack.append(item_to_equip)
+                self.max_inv_size += item_to_equip.capacity
+                print(f"{item_to_equip} equipped")
+                return True
 
         print("Both hands are occupied.")
         return False
@@ -368,4 +380,4 @@ class Hero():
         self.speed += item.speed
     
     def __repr__(self):
-        return f"Health: {self.health}\nAttack: {self.attack}\nDefense: {self.defense}\nSpeed: {self.speed}\nGold: {self.gold}"
+        return f"Health: {self.health}\nAttack: {self.attack}\nDefense: {self.defense}\nSpeed: {self.speed}\nMax Inventory Size: {self.max_inv_size}\nGold: {round(self.gold, 1):.1f}"
