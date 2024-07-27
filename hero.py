@@ -1,6 +1,6 @@
 import time
 from loot import *
-from menu import menu_selection
+from menu import menu_selection, open_shop
 
 class Hero():
     def __init__(self, name, health, attack, defense, speed):
@@ -16,7 +16,7 @@ class Hero():
         self.feet = []
         self.chest = []
         self.location = "Center of Town"
-        self.gold = 0
+        self.gold = 50
         self.inventory = [Weapon("Stick", "Weapon", 0, 2, False)]
         self.equip_list = []
         self.equipped = []
@@ -51,12 +51,12 @@ class Hero():
             print(f"\nYour inventory has {self.max_inv_size - len(self.inventory)}/{self.max_inv_size} slots available.")
         while len(self.inventory) < self.max_inv_size and monster.inventory:
             for index, item in enumerate(monster.inventory):
-                add_to_inv = input(f"Would you like to add {item.name} to your inventory? (y/n): ")
-                if add_to_inv.lower() == "y":
+                add_to_inv = input(f"Would you like to add {item.name} to your inventory? (y/n): ").lower()
+                if add_to_inv == "y":
                     self.inventory.append(item)
                     monster.inventory.remove(item)
                     break
-                elif add_to_inv.lower() == "n":
+                elif add_to_inv == "n":
                     monster.inventory.remove(item)
                 else:
                     print("Invalid response. Please try again!")

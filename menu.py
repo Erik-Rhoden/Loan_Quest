@@ -1,5 +1,6 @@
 from battle import path_difficulty, battle
 from monster import monster_selection
+from shop import *
 
 def menu_selection(hero):
     while True:
@@ -38,12 +39,13 @@ def travel(hero):
         "o": "Orc Valley"
     }
     loc_frmt = "|--Shop-(s)| |--Center of Town-(c)| |--Edge of Town-(e)| |--Slime Plains-(p)| |--Goblin Forest-(g)| |--Orc Valley-(o)|"
-    location_choice = location_choice = input(f"Where would you like to go next?\n{loc_frmt}\n").lower()
+    location_choice = input(f"Where would you like to go next?\n{loc_frmt}\n").lower()
 
     if location_choice in locations:
         hero.location = locations[location_choice]
         if location_choice in ["s", "c", "e"]:
-            pass
+            if location_choice == 's':
+                open_shop(hero)
         else:
             difficulty = path_difficulty(hero.location)
             monster = monster_selection(difficulty)
@@ -70,3 +72,41 @@ def display_stats(hero):
         print("--------------")
         hero.print_slots_status()
     print("|--Complete--|")
+
+def open_shop(hero):
+    shop = Shop()
+    shop_options = "|--Buy-(b)| |--Sell-(s)|"
+    print("--------------")
+    shop_choice = input(f"Would you like to see our offerings or sell your goods?\n{shop_options}\n")
+    print("--------------")
+    if shop_choice == 'b':
+        while True:
+            shop_list = []
+            for key, item in enumerate(shop.inventory):
+                shop_list.append(item)
+                print(f"{key + 1}. {item}")
+            print(f"\nYour gold: {hero.gold}")
+            print("--------------")
+            purchase_choice = input("Enter the number next to the item you would like to purchase or 'q' to quit. ")
+            print("--------------")
+            if purchase_choice.lower() == 'q':
+                break
+            try:
+                purchase_choice = int(purchase_choice)
+                if 0 < purchase_choice <= len(shop_list):
+                    if shop_list[purchase_choice - 1].value <= hero.gold:
+                        hero.gold -= shop_list[purchase_choice - 1].value
+                        hero.inventory.append(shop_list[purchase_choice - 1])
+                        shop.inventory.remove(shop_list[purchase_choice - 1])
+                        shop_list.remove(shop_list[purchase_choice - 1])
+                    else:
+                        print("--------------")
+                        print("You do not have enough gold")
+                        print("--------------")
+                else:
+                    print("Invalid choice. Please try again.")
+            except ValueError:
+                print("Please enter a valid choice.")
+                print("--------------")      
+
+            

@@ -748,10 +748,11 @@ loot_map = {"Green Slime": {
         }
 
 class Item():
-    def __init__(self, name, type, value):
+    def __init__(self, name, type, value, capacity=None):
         self.name = name
         self.type = type
         self.value = value
+        self.capacity = capacity
 
     def __repr__(self):
         return f"{self.name}({self.type}) - Value: {self.value}"
