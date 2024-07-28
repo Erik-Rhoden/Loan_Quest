@@ -103,11 +103,13 @@ def open_shop(hero):
                 try:
                     purchase_choice = int(purchase_choice)
                     if 0 < purchase_choice <= len(shop_list):
-                        if shop_list[purchase_choice - 1].value <= hero.gold:
-                            hero.gold -= shop_list[purchase_choice - 1].value
-                            hero.inventory.append(shop_list[purchase_choice - 1])
-                            shop.inventory.remove(shop_list[purchase_choice - 1])
-                            shop_list.remove(shop_list[purchase_choice - 1])
+                        item = shop_list[purchase_choice - 1]
+                        if item.value <= hero.gold:
+                            hero.gold -= item.value
+                            item.value = int(item.value / 4)
+                            hero.inventory.append(item)
+                            shop.inventory.remove(item)
+                            shop_list.remove(item)
                         else:
                             print("--------------")
                             print("You do not have enough gold")
@@ -133,8 +135,9 @@ def open_shop(hero):
                 try:
                     sell_choice = int(sell_choice)
                     if 0 < sell_choice <= len(hero.inventory):
-                        hero.gold += hero.inventory[sell_choice - 1].value
-                        hero.inventory.remove(hero.inventory[sell_choice - 1])
+                        item = hero.inventory[sell_choice - 1]
+                        hero.gold += item.value
+                        hero.inventory.remove(item)
                     else:
                         print("Invalid choise. Please try again.")
                 except ValueError:

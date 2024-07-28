@@ -39,39 +39,44 @@ class Hero():
     def get_loot(self, monster):
         print("--------------")
         print(f"You defeated {monster.name}!\n")
-        if not monster.inventory:
+        if not monster.inventory and monster.gold == 0:
             print(f"Too bad! The {monster.name} had nothing!")
             return
-        if monster.gold:
+        elif not monster.inventory and monster.gold:
             self.gold += monster.gold
-        print(f"{monster.name} dropped the following items:")
-        for index, item in enumerate(monster.inventory):
-            print(f"{index + 1}. {item}")
-        if self.max_inv_size - len(self.inventory) == 0:
-            self.inventory_full()
-        else:
-            print(f"\nYour inventory has {self.max_inv_size - len(self.inventory)}/{self.max_inv_size} slots available.")
-        while len(self.inventory) < self.max_inv_size and monster.inventory:
+            print(f"The {monster.name} had {monster.gold} gold!")
+        elif monster.inventory:
+            print("--------------")
+            print(f"{monster.name} dropped {monster.gold} gold!")
+            print(f"{monster.name} dropped the following items:")
+            print("--------------")
             for index, item in enumerate(monster.inventory):
-                add_to_inv = input(f"Would you like to add {item.name} to your inventory? (y/n): ").lower()
-                if add_to_inv == "y":
-                    self.inventory.append(item)
-                    monster.inventory.remove(item)
-                    break
-                elif add_to_inv == "n":
-                    monster.inventory.remove(item)
-                else:
-                    print("Invalid response. Please try again!")
-            if len(self.inventory) == self.max_inv_size:
-                if monster.inventory:
-                    self.inventory_full()
-                    choice = input("Would you like to remove an item? (y/n): ")
-                    if choice == "y":
-                        self.remove_items()
-                    if choice == "n":
+                print(f"{index + 1}. {item}")
+            if self.max_inv_size - len(self.inventory) == 0:
+                self.inventory_full()
+            else:
+                print(f"\nYour inventory has {self.max_inv_size - len(self.inventory)}/{self.max_inv_size} slots available.")
+            while len(self.inventory) < self.max_inv_size and monster.inventory:
+                for index, item in enumerate(monster.inventory):
+                    add_to_inv = input(f"Would you like to add {item.name} to your inventory? (y/n): ").lower()
+                    if add_to_inv == "y":
+                        self.inventory.append(item)
+                        monster.inventory.remove(item)
                         break
-                else:
-                    self.inventory_full()
+                    elif add_to_inv == "n":
+                        monster.inventory.remove(item)
+                    else:
+                        print("Invalid response. Please try again!")
+                if len(self.inventory) == self.max_inv_size:
+                    if monster.inventory:
+                        self.inventory_full()
+                        choice = input("Would you like to remove an item? (y/n): ")
+                        if choice == "y":
+                            self.remove_items()
+                        if choice == "n":
+                            break
+                    else:
+                        self.inventory_full()
 
     def inventory_full(self):
         print("--------------\n")
