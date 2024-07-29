@@ -6,6 +6,7 @@ class Hero():
     def __init__(self, name, health, attack, defense, speed):
         self.name = name
         self.health = health
+        self.max_hp = health
         self.attack = attack
         self.defense = defense
         self.speed = speed
@@ -28,13 +29,35 @@ class Hero():
         return self.health
 
     def deal_damage(self, target):
-        net_damage = self.attack - target.defense
-        if target.defense > self.attack:
-            target.health
-        elif net_damage > target.health:
-            target.health = 0
-        else:
-            target.health -= net_damage
+        damage = int(round(self.attack * (1 - target.defense / (target.defense + 50)), 0))
+        target.health -= damage
+        print(f"{target.name} has taken {damage} damage!")
+
+    def heal_self(self):
+        heal_amount = 0
+        while True:
+            for index, item in enumerate(self.inventory):
+                if hasattr(item, 'heal'):
+                    print(f"{index + 1}. {item.name} - Heal: {item.heal}")
+            print("--------------")
+            heal_choice = input("Which potion would you like to use or 'q' to quit? ")
+            if heal_choice.lower() == 'q':
+                print("\nExiting the remove menu.\n")
+                print("--------------")
+                break
+            if heal_choice.isdigit():
+                heal_choice = int(heal_choice)
+                heal_amount = item.heal
+                if 1 <= heal_choice <= len(self.inventory):
+                    if self.health + self.inventory[heal_choice - 1].heal >= self.max_hp:
+                        self.health = self.max_hp
+                        self.inventory.remove(item)
+                        break
+                    elif self.health + self.inventory[heal_choice - 1].heal < self.max_hp:
+                        self.health += self.inventory[heal_choice - 1].heal
+                        self.inventory.remove(item)
+                        break
+        return heal_amount
 
     def get_loot(self, monster):
         print("--------------")
@@ -96,7 +119,7 @@ class Hero():
             else:
                 self.get_inventory_list()
             print("--------------")
-            choice = input("\nWould you like to equip 'e' an item, unequip 'u' equipment, drop 'd' an item or quit 'q' selection? ").lower()
+            choice = input("\nWould you like to equip 'e' an item, unequip 'u' equipment, heal 'h' yourself, drop 'd' an item or quit 'q' selection? ").lower()
             if choice == 'q':
                 print("--------------")
                 print("Returning to the main menu.")
@@ -105,6 +128,9 @@ class Hero():
                 self.equip_item()
             elif choice == 'u':
                 self.unequip_items()
+            elif choice == 'h':
+                heal_amount = self.heal_self()
+                print(f"{self.name} healed themselves for {heal_amount} HP")
             elif choice == 'd':
                 self.remove_items()
 
@@ -385,4 +411,4 @@ class Hero():
         self.speed += item.speed
     
     def __repr__(self):
-        return f"Health: {self.health}\nAttack: {self.attack}\nDefense: {self.defense}\nSpeed: {self.speed}\nMax Inventory Size: {self.max_inv_size}\nGold: {round(self.gold, 1):.1f}"
+        return f"Health: {self.health}/{self.max_hp}\nAttack: {self.attack}\nDefense: {self.defense}\nSpeed: {self.speed}\nMax Inventory Size: {self.max_inv_size}\nGold: {round(self.gold, 1):.1f}"

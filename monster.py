@@ -5,6 +5,7 @@ class Monster():
     def __init__(self, name, health, attack, defense, speed):
         self.name = name
         self.health = health
+        self.max_hp = health
         self.attack = attack
         self.defense = defense
         self.speed = speed
@@ -16,13 +17,22 @@ class Monster():
         return self.health
 
     def deal_damage(self, target):
-        net_damage = self.attack - target.defense
-        if target.defense > self.attack:
-            target.health
-        elif net_damage > target.health:
-            target.health = 0
-        else:
-            target.health -= net_damage
+        damage = int(round(self.attack * (1 - target.defense / (target.defense + 50)), 0))
+        target.health -= damage
+        print(f"{target.name} has taken {damage} damage!")
+
+    def heal_self(self):
+        heal_amount = 0
+        for item in self.inventory:
+            if hasattr(item, 'heal'):
+                heal_amount = item.heal
+                if self.health + item.heal >= self.max_hp:
+                    self.health = self.max_hp
+                    self.inventory.remove(item)
+                elif self.health + item.heal < self.max_hp:
+                    self.health += item.heal
+                    self.inventory.remove(item)
+        return heal_amount
 
     def populate_inventory(self):
         categories = ["weapon", "armor", "potion", "misc"]
