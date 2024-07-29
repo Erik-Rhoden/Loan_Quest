@@ -65,7 +65,7 @@ def travel(hero):
             print(f"Invalid entry. Please try again.")
 
 def display_stats(hero):
-    print(f"\n|--{hero.name}--|")
+    print(f"\n|--{hero.name} - Level: {hero.level}--|")
     print(hero.__repr__())
     print("--------------")
     if not hero.equipped:
@@ -76,6 +76,10 @@ def display_stats(hero):
         for index, item in enumerate(hero.equipped):
             print(f"{index + 1}. {item}")
         print("--------------")
+        if hero.inventory:
+            print("|-Inventory-|")
+            hero.get_inventory_list()
+            print("--------------")
         hero.print_slots_status()
     print("|--Complete--|")
 

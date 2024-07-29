@@ -7,10 +7,9 @@
 ## To-Do
 ### (Non-Exhaustive)
 
-1. Add hero leveling system
-2. Add random flavor text for pre-encounter
-3. Add basic manual
-4. Add equipment system for monsters
+1. Add random flavor text for pre-encounter
+2. Add basic manual
+3. Add equipment system for monsters
 
 ## Completed
 
@@ -27,3 +26,4 @@
 * Add complex menu options
 * Add complex battle functionality
 * Add healing system for hero and monster
+* Add hero leveling system

@@ -7,6 +7,8 @@ class Hero():
         self.name = name
         self.health = health
         self.max_hp = health
+        self.xp = 0
+        self.level = 1
         self.attack = attack
         self.defense = defense
         self.speed = speed
@@ -25,13 +27,56 @@ class Hero():
         self.max_inv_size = 8
         self.exit_game = False
 
-    def get_health(self):
-        return self.health
-
     def deal_damage(self, target):
         damage = int(round(self.attack * (1 - target.defense / (target.defense + 50)), 0))
         target.health -= damage
         print(f"{target.name} has taken {damage} damage!")
+
+    def check_level(self):
+        while True:
+            current_level = self.level
+            next_level_up = int(round(30 * (1.5 ** (current_level - 1))))
+            if self.xp >= next_level_up:
+                self.level += 1
+                self.xp = 0
+                print(f"Congratulations! {self.name} reached level {self.level}!")
+                self.update_stats(current_level)
+                self.health = self.max_hp
+            else:
+                break
+
+    def update_stats(self, current_level):
+        modifier = 1.2
+        base_attack_increase = round((self.attack - self.get_attack_modifiers()) * modifier)
+        base_defense_increase = round((self.defense - self.get_defense_modifiers()) * modifier)
+        base_speed_increase = round((self.speed - self.get_speed_modifiers()) * modifier)
+        self.max_hp = round(self.max_hp * modifier)
+        self.attack += base_attack_increase - self.attack
+        self.defense += base_defense_increase - self.defense
+        self.speed += base_speed_increase - self.speed
+
+    def get_attack_modifiers(self):
+        modifier = 0
+        for item in self.equipped:
+            if hasattr(item, "Weapon"):
+                modifier += item.damage
+            elif hasattr(item, "Armor"):
+                modifier += item.defense
+        return modifier
+    
+    def get_defense_modifiers(self):
+        modifier = 0
+        for item in self.equipped:
+            if hasattr(item, "Armor"):
+                modifier += item.defense
+        return modifier
+
+    def get_speed_modifiers(self):
+        modifier = 0
+        for item in self.equipped:
+            if hasattr(item, "Weapon") or hasattr(item, "Armor"):
+                modifier += item.speed
+        return modifier
 
     def heal_self(self):
         heal_amount = 0
@@ -61,7 +106,7 @@ class Hero():
 
     def get_loot(self, monster):
         print("--------------")
-        print(f"You defeated {monster.name}!\n")
+        print(f"You defeated {monster.name}!")
         if not monster.inventory and monster.gold == 0:
             print(f"Too bad! The {monster.name} had nothing!")
             return

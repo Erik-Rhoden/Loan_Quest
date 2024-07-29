@@ -39,11 +39,18 @@ def battle(hero, monster):
         print(f"{monster.name} defeated {hero.name}!")
         hero.exit_game = True
     else:
+        print("--------------")
+        print("|--Final Battle Stats--|")
+        get_xp(hero, monster)
+        print(hero.xp)
+        hero.check_level()
+        print(f"{hero.name}: {hero.health}/{hero.max_hp} HP")
         hero.get_loot(monster)
 
 def hero_battle_options(hero, monster):
     battle_menu = "|--Attack-(a)| |--Heal-(h)| |--Run-(r)|\n"
     battle_choice = input(f"What would you like to do?\n{battle_menu}").lower()
+    print("--------------")
     if battle_choice == 'a':
         hero.deal_damage(monster)
         if 0 < monster.health < (monster.max_hp * 0.5) and potion_check(monster):
@@ -64,3 +71,8 @@ def potion_check(monster):
         if hasattr(item, 'heal'):
             return True
     return False
+
+def get_xp(hero, monster):
+    xp = int(round((monster.max_hp + monster.attack + monster.defense) / 5, 0))
+    hero.xp += xp
+    print(f"{hero.name} receives {xp} XP")
