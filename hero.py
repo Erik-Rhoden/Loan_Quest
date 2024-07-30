@@ -87,7 +87,7 @@ class Hero():
                 break
             for index, item in enumerate(self.inventory):
                 if hasattr(item, 'heal'):
-                    print(f"{index + 1}. {item.name} - Heal: {item.heal}")
+                    print(f"{index}. {item.name} - Heal: {item.heal}")
             print("--------------")
             heal_choice = input("Which potion would you like to use or 'q' to quit? ")
             if heal_choice.lower() == 'q':
@@ -262,6 +262,7 @@ class Hero():
                             unequip_choice = input("Would you like to un-equip an item? (y/n): ")
                             if unequip_choice == "y":
                                 self.unequip_items()
+                                break
                             elif unequip_choice == "n":
                                 break
                             else:
@@ -278,13 +279,13 @@ class Hero():
 
     def unequip_items(self):
         while True:
-            print("\nThe following items are available to remove...")
+            print("\nThe following items are available to unequip...")
             print("--------------")
             self.get_equipped_list()
             if not self.equipped:
                 print("Nothing to remove.")
                 print("--------------")
-            choice = input("\nEnter the number of the item you want to remove (or 'q' to quit): ")
+            choice = input("\nEnter the number of the item you want to unequip (or 'q' to quit): ")
             if choice.lower() == 'q':
                 print("Exiting the equip menu.")
                 break
