@@ -81,6 +81,10 @@ class Hero():
     def heal_self(self):
         heal_amount = 0
         while True:
+            healing_items = [(index, item) for index, item in enumerate(self.inventory) if hasattr(item, 'heal')]
+            if not healing_items:
+                print("No potions available")
+                break
             for index, item in enumerate(self.inventory):
                 if hasattr(item, 'heal'):
                     print(f"{index + 1}. {item.name} - Heal: {item.heal}")
@@ -92,16 +96,15 @@ class Hero():
                 break
             if heal_choice.isdigit():
                 heal_choice = int(heal_choice)
-                heal_amount = item.heal
-                if 1 <= heal_choice <= len(self.inventory):
-                    if self.health + self.inventory[heal_choice - 1].heal >= self.max_hp:
+                if 1 <= heal_choice <= len(healing_items):
+                    index, potion = healing_items[heal_choice -1]
+                    heal_amount = potion.heal
+                    if self.health + heal_amount >= self.max_hp:
                         self.health = self.max_hp
-                        self.inventory.remove(item)
-                        break
-                    elif self.health + self.inventory[heal_choice - 1].heal < self.max_hp:
-                        self.health += self.inventory[heal_choice - 1].heal
-                        self.inventory.remove(item)
-                        break
+                    else:
+                        self.health += heal_amount
+                    self.inventory.pop(index)
+                    break
         return heal_amount
 
     def get_loot(self, monster):
