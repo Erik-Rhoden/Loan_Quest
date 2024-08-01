@@ -18,8 +18,15 @@ class Monster():
 
     def deal_damage(self, target):
         damage = int(round(self.attack * (1 - target.defense / (target.defense + 50)), 0))
-        target.health -= damage
-        print(f"{target.name} has taken {damage} damage!")
+        if self.speed > target.speed * 3:
+            modifier = ((self.speed - (target.speed * 3)) / 10) + 1
+            if random.randint(1,3) == 1:
+                critical_hit = damage * modifier
+                target.health -= critical_hit
+                print(f"{target.name} has taken {critical_hit} critical damage!")
+        else:
+            target.health -= damage
+            print(f"{target.name} has taken {damage} damage!")
 
     def heal_self(self):
         heal_amount = 0
@@ -67,6 +74,8 @@ class Monster():
 
     def update_speed(self, item):
         self.speed += item.speed
+        if self.speed < 3:
+            self.speed = 3
 
     def update_defense(self, armor):
         self.defense += armor.defense
