@@ -35,6 +35,9 @@ class Hero():
                 critical_hit = damage * modifier
                 target.health -= critical_hit
                 print(f"{target.name} has taken {critical_hit} critical damage!")
+            else:
+                target.health -= damage
+                print(f"{target.name} has taken {damage} damage!")
         else:
             target.health -= damage
             print(f"{target.name} has taken {damage} damage!")

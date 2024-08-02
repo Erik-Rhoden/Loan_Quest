@@ -42,7 +42,6 @@ def battle(hero, monster):
         print("--------------")
         print("|--Final Battle Stats--|")
         get_xp(hero, monster)
-        print(hero.xp)
         hero.check_level()
         print(f"{hero.name}: {hero.health}/{hero.max_hp} HP")
         hero.get_loot(monster)

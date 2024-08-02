@@ -140,6 +140,11 @@ loot_map = {"Green Slime": {
                                     "Speed": 4,
                                     "Body": "Chest",
                                     "Value": 2
+                            },  "Leather Cap": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
                             },  "Wooden Shield": {
                                     "Defense": 8,
                                     "Speed": 2,
@@ -288,6 +293,11 @@ loot_map = {"Green Slime": {
                                     "Speed": 2,
                                     "Body": "Chest",
                                     "Value": 10
+                            },  "Leather Cap": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
                             },  "Iron Helm": {
                                     "Defense": 8,
                                     "Speed": -2,
@@ -362,6 +372,16 @@ loot_map = {"Green Slime": {
                                     "Speed": 2,
                                     "Body": "Chest",
                                     "Value": 10
+                            },  "Leather Cap": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
+                            },  "Wooden Shield": {
+                                    "Defense": 8,
+                                    "Speed": 2,
+                                    "Body": "Off-Hand",
+                                    "Value": 5
                             },  "Iron Boots": {
                                     "Defense": 7,
                                     "Speed": -2,
@@ -432,9 +452,39 @@ loot_map = {"Green Slime": {
                                     "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 50
+                            },  "Stiletto": {
+                                    "Damage": 10,
+                                    "Speed": 8,
+                                    "Two-Hand": False,
+                                    "Value": 75
                             }
                     }, "armor": {
-                                "Iron Boots": {
+                                "Leather Shoes": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
+                            },  "Leather Pants": {
+                                    "Defense": 4,
+                                    "Speed": 2,
+                                    "Body": "Legs",
+                                    "Value": 10
+                            },  "Leather Chest": {
+                                    "Defense": 4,
+                                    "Speed": 2,
+                                    "Body": "Chest",
+                                    "Value": 10
+                            },  "Leather Cap": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
+                            },  "Wooden Shield": {
+                                    "Defense": 8,
+                                    "Speed": 2,
+                                    "Body": "Off-Hand",
+                                    "Value": 5
+                            },  "Iron Boots": {
                                     "Defense": 7,
                                     "Speed": -2,
                                     "Body": "Feet",
@@ -509,9 +559,39 @@ loot_map = {"Green Slime": {
                                     "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 50
+                            },  "Stiletto": {
+                                    "Damage": 10,
+                                    "Speed": 8,
+                                    "Two-Hand": False,
+                                    "Value": 75
                             }
                     },  "armor": {
-                                "Iron Boots": {
+                                "Leather Shoes": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
+                            },  "Leather Pants": {
+                                    "Defense": 4,
+                                    "Speed": 2,
+                                    "Body": "Legs",
+                                    "Value": 10
+                            },  "Leather Chest": {
+                                    "Defense": 4,
+                                    "Speed": 2,
+                                    "Body": "Chest",
+                                    "Value": 10
+                            },  "Leather Cap": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
+                            },  "Wooden Shield": {
+                                    "Defense": 8,
+                                    "Speed": 2,
+                                    "Body": "Off-Hand",
+                                    "Value": 5
+                            },  "Iron Boots": {
                                     "Defense": 7,
                                     "Speed": -2,
                                     "Body": "Feet",
@@ -586,9 +666,39 @@ loot_map = {"Green Slime": {
                                     "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 50
+                            },  "Stiletto": {
+                                    "Damage": 10,
+                                    "Speed": 8,
+                                    "Two-Hand": False,
+                                    "Value": 75
                             }
                     }, "armor": {
-                                "Iron Boots": {
+                                "Leather Shoes": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
+                            },  "Leather Pants": {
+                                    "Defense": 4,
+                                    "Speed": 2,
+                                    "Body": "Legs",
+                                    "Value": 10
+                            },  "Leather Chest": {
+                                    "Defense": 4,
+                                    "Speed": 2,
+                                    "Body": "Chest",
+                                    "Value": 10
+                            },  "Leather Cap": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
+                            },  "Wooden Shield": {
+                                    "Defense": 8,
+                                    "Speed": 2,
+                                    "Body": "Off-Hand",
+                                    "Value": 5
+                            },  "Iron Boots": {
                                     "Defense": 7,
                                     "Speed": -2,
                                     "Body": "Feet",
@@ -608,11 +718,6 @@ loot_map = {"Green Slime": {
                                     "Speed": -2,
                                     "Body": "Head",
                                     "Value": 20
-                            },  "Steel Shield": {
-                                    "Defense": 35,
-                                    "Speed": -10,
-                                    "Body": "Off-Hand",
-                                    "Value": 100
                             },  "Iron Shield": {
                                     "Defense": 20,
                                     "Speed": -5,
@@ -668,9 +773,39 @@ loot_map = {"Green Slime": {
                                     "Speed": -2,
                                     "Two-Hand": False,
                                     "Value": 50
+                            },  "Stiletto": {
+                                    "Damage": 10,
+                                    "Speed": 8,
+                                    "Two-Hand": False,
+                                    "Value": 75
                             }
                     },  "armor": {
-                                "Iron Boots": {
+                                "Leather Shoes": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
+                            },  "Leather Pants": {
+                                    "Defense": 4,
+                                    "Speed": 2,
+                                    "Body": "Legs",
+                                    "Value": 10
+                            },  "Leather Chest": {
+                                    "Defense": 4,
+                                    "Speed": 2,
+                                    "Body": "Chest",
+                                    "Value": 10
+                            },  "Leather Cap": {
+                                    "Defense": 1,
+                                    "Speed": 2,
+                                    "Body": "Feet",
+                                    "Value": 3
+                            },  "Wooden Shield": {
+                                    "Defense": 8,
+                                    "Speed": 2,
+                                    "Body": "Off-Hand",
+                                    "Value": 5
+                            },  "Iron Boots": {
                                     "Defense": 7,
                                     "Speed": -2,
                                     "Body": "Feet",
