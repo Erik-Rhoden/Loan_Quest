@@ -9,7 +9,6 @@
 
 1. Add random flavor text for pre-encounter
 2. Add basic manual
-3. Add equipment system for monsters
 
 ## Completed
 
@@ -27,3 +26,4 @@
 * Add complex battle functionality
 * Add healing system for hero and monster
 * Add hero leveling system
+* Add equipment system for monsters
