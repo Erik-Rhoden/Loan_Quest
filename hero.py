@@ -19,13 +19,15 @@ class Hero():
         self.feet = []
         self.chest = []
         self.backpack = []
-        self.location = "Center of Town"
+        self.location = "Shop"
         self.gold = 0.0
         self.inventory = [Weapon("Stick", "Weapon", 0, 2, False)]
         self.equip_list = []
         self.equipped = []
         self.max_inv_size = 8
         self.exit_game = False
+        self.time = 0
+        self.max_time = 168
 
     def deal_damage(self, target):
         damage = int(round(self.attack * (1 - target.defense / (target.defense + 50)), 0))
@@ -503,4 +505,4 @@ class Hero():
             self.speed = 3
     
     def __repr__(self):
-        return f"Health: {self.health}/{self.max_hp}\nAttack: {self.attack}\nDefense: {self.defense}\nSpeed: {self.speed}\nMax Inventory Size: {self.max_inv_size}\nGold: {round(self.gold, 1):.1f}"
+        return f"Health: {round(self.health)}/{self.max_hp}\nAttack: {self.attack}\nDefense: {self.defense}\nSpeed: {self.speed}\nMax Inventory Size: {self.max_inv_size}\nGold: {round(self.gold, 1):.1f}"

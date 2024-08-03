@@ -2,6 +2,13 @@ from battle import path_difficulty, battle
 from monster import monster_selection
 from shop import *
 
+locations = {
+        "s": "Shop",
+        "p": "Slime Plains",
+        "g": "Goblin Forest",
+        "o": "Orc Valley"
+    }
+
 def menu_selection(hero):
     while True:
         if hero.exit_game:
@@ -30,15 +37,7 @@ def menu_selection(hero):
             print(f"Invalid entry. Please try again.")
 
 def travel(hero):
-    locations = {
-        "s": "Shop",
-        "c": "Center of Town",
-        "e": "Edge of Town",
-        "p": "Slime Plains",
-        "g": "Goblin Forest",
-        "o": "Orc Valley"
-    }
-    loc_frmt = "|--Shop-(s)| |--Center of Town-(c)| |--Edge of Town-(e)| |--Slime Plains-(p)| |--Goblin Forest-(g)| |--Orc Valley-(o)|"
+    loc_frmt = "|--Shop-(s)| |--Slime Plains-(p)| |--Goblin Forest-(g)| |--Orc Valley-(o)|"
     exit = "|--Exit-(x)|"
     while True:
         location_choice = input(f"Where would you like to go next or 'x' to exit to main menu?\n{loc_frmt}\n{exit}\n").lower()
@@ -46,10 +45,11 @@ def travel(hero):
             break
 
         if location_choice in locations:
+            current_location = hero.location
             hero.location = locations[location_choice]
-            if location_choice in ["s", "c", "e"]:
-                if location_choice == 's':
-                    open_shop(hero)
+            hero.time += round(time_logged(current_location, hero.location), 1)
+            if location_choice == 's':
+                open_shop(hero)
             else:
                 difficulty = path_difficulty(hero.location)
                 monster = monster_selection(difficulty)
@@ -65,7 +65,8 @@ def travel(hero):
             print(f"Invalid entry. Please try again.")
 
 def display_stats(hero):
-    print(f"\n|--{hero.name} - Level: {hero.level}--|")
+    time_left = hero.max_time - hero.time
+    print(f"\n|--{hero.name} - Level: {hero.level} - Time Left: {time_left:.2f}--|")
     print(hero.__repr__())
     print("--------------")
     if not hero.equipped:
@@ -147,3 +148,12 @@ def open_shop(hero):
                 except ValueError:
                     print("Please enter a valid choice.")
                     print("--------------")
+
+def time_logged(current_location, destination):
+    destinations = ['Shop', 'Slime Plains', 'Goblin Forest', 'Orc Valley']
+    difference = abs(destinations.index(current_location) - destinations.index(destination))
+    if current_location != destination:
+        time_past = difference * 0.25
+        return time_past
+    else:
+        return 0.1
