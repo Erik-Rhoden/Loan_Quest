@@ -1,11 +1,11 @@
 from dialogue import opening_scene
 from monster import *
 from hero import *
-from menu import menu_selection, time_logged
+from menu import menu_selection
 
 def main():
     # name = opening_scene()
-    hero = Hero("Zilharr", 100, 5, 5, 3)
+    hero = Hero("Zilharr", 10, 5, 5, 3)
     hero.equip_item()
     game_running = True
 
