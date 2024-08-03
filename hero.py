@@ -126,42 +126,67 @@ class Hero():
         elif not monster.inventory and monster.gold:
             self.gold += monster.gold
             print(f"The {monster.name} had {monster.gold} gold!")
-        elif monster.inventory:
-            print("--------------")
-            print(f"{monster.name} dropped {monster.gold} gold!")
-            print(f"{monster.name} dropped the following items:")
-            print("--------------")
+            self.get_loot_helper(monster, [])
+        elif len(monster.inventory) < 3:
+            self.get_loot_helper(monster, monster.inventory)
+        elif len(monster.inventory) > 2 and monster.gold:
             available_items = monster.get_inventory_list()
             random.shuffle(available_items)
-            limit = int(len(available_items) / 2)
-            selected_items = [item for item in available_items[:limit] if item != ('Empty', 0)]
-            for index, item in enumerate(selected_items):
-                print(f"{index + 1}. {item}")
-            if self.max_inv_size - len(self.inventory) == 0:
-                self.inventory_full()
-            else:
-                print(f"\nYour inventory has {self.max_inv_size - len(self.inventory)}/{self.max_inv_size} slots available.")
-            while len(self.inventory) < self.max_inv_size and selected_items:
-                for index, item in enumerate(selected_items):
-                    add_to_inv = input(f"Would you like to add {item.name} to your inventory? (y/n): ").lower()
-                    if add_to_inv == "y":
-                        self.inventory.append(item)
-                        selected_items.remove(item)
-                        break
-                    elif add_to_inv == "n":
-                        selected_items.remove(item)
-                    else:
-                        print("Invalid response. Please try again!")
-                if len(self.inventory) == self.max_inv_size:
-                    if selected_items:
-                        self.inventory_full()
-                        choice = input("Would you like to remove an item? (y/n): ")
-                        if choice == "y":
-                            self.remove_items()
-                        if choice == "n":
+            limit = round(len(available_items) / 2)
+            selected_items = available_items[:limit]
+            self.get_loot_helper(monster, selected_items)
+
+    def get_loot_helper(self, monster, inventory):
+        print("--------------")
+        print(f"{monster.name} dropped {monster.gold} gold!")
+        if monster.gold > 0:
+            self.gold += monster.gold
+        if not inventory:
+            print("No items dropped.")
+            return
+
+        print(f"{monster.name} dropped the following items:")
+        print("--------------")
+        for index, item in enumerate(inventory):
+            print(f"{index + 1}. {item}")
+        print(f"\nYour inventory has {self.max_inv_size - len(self.inventory)}/{self.max_inv_size} slots available.")
+        while len(self.inventory) < self.max_inv_size and inventory:
+            for index, item in enumerate(inventory):
+                add_to_inv = input(f"Would you like to add {item.name} to your inventory? (y/n): ").lower()
+                if add_to_inv == "y":
+                    self.inventory.append(item)
+                    inventory.remove(item)
+                    break
+                elif add_to_inv == "n":
+                    inventory.remove(item)
+                else:
+                    print("Invalid response. Please try again!")
+
+        if len(self.inventory) == self.max_inv_size and inventory:
+            while inventory:
+                choice = input("\nYour inventory is full. Would you like to remove an item? (y/n): ")
+                
+                if choice == "y":
+                    self.remove_items()
+                elif choice == "n":
+                    print("You chose to discard the loot item.")
+                    break
+                else:
+                    print("Invalid choice. Please enter 'y' or 'n'.")
+                
+                if len(self.inventory) < self.max_inv_size:
+                    for index, item in enumerate(inventory):
+                        add_to_inv = input(f"Would you like to add {item.name} to your inventory? (y/n): ").lower()
+                        if add_to_inv == "y":
+                            self.inventory.append(item)
+                            inventory.remove(item)
                             break
-                    else:
-                        self.inventory_full()
+                        elif add_to_inv == "n":
+                            inventory.remove(item)
+                        else:
+                            print("Invalid response. Please try again!")
+        elif not inventory:
+            print("No more items to add.")
 
     def inventory_full(self):
         print("--------------\n")
@@ -223,15 +248,17 @@ class Hero():
                     print("--------------")
 
     def inventory_list(self):
-        self.inventory_list = []
+        inventory_details = []
         for index, item in enumerate(self.inventory):
-            self.inventory_list.append((index, item))
+            inventory_details.append((index, item))
             if isinstance(item, Potion):
-                print(f"{len(self.inventory_list)}. {item.name} ({item.type}) - {'Healing: ' + str(item.heal)}, 'Value': {item.value} gold")
-            elif isinstance(item, Weapon) or isinstance(item, Armor):
-                print(f"{len(self.inventory_list)}. {item.name} ({item.type}) - {'Damage: ' + str(item.damage) if isinstance(item, Weapon) else 'Defense: ' + str(item.defense)}, Value: {item.value} gold")
+                print(f"{index + 1}. {item.name} ({item.type}) - Healing: {item.heal}, Value: {item.value} gold")
+            elif isinstance(item, Weapon):
+                print(f"{index + 1}. {item.name} ({item.type}) - Damage: {item.damage}, Value: {item.value} gold")
+            elif isinstance(item, Armor):
+                print(f"{index + 1}. {item.name} ({item.type}) - Defense: {item.defense}, Value: {item.value} gold")
             elif isinstance(item, Item):
-                print(f"{len(self.inventory_list)}. {item.name} ({item.type}) - 'Value': {item.value} gold")
+                print(f"{index + 1}. {item.name} ({item.type}) - Value: {item.value} gold")
 
     def get_equip_list(self):
         self.equip_list = []
