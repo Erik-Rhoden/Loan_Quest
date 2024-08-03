@@ -78,7 +78,7 @@ def display_stats(hero):
         print("--------------")
         if hero.inventory:
             print("|-Inventory-|")
-            hero.get_inventory_list()
+            hero.inventory_list()
             print("--------------")
         hero.print_slots_status()
     print("|--Complete--|")

@@ -69,6 +69,12 @@ class Monster():
                 self.gold += item_properties["Value"]
                 selected_items.remove(item)
 
+    def get_inventory_list(self):
+        self.inventory_list = []
+        for item in self.inventory:
+            self.inventory_list.append(item)
+        return self.inventory_list
+
     def equip_items(self):
         available_chest, available_head, available_legs, available_feet, available_weapon, available_off_hand = [], [], [], [], [], []
         for loot_name, loot_properties in loot_map[self.name]["armor"].items():

@@ -131,25 +131,29 @@ class Hero():
             print(f"{monster.name} dropped {monster.gold} gold!")
             print(f"{monster.name} dropped the following items:")
             print("--------------")
-            for index, item in enumerate(monster.inventory):
+            available_items = monster.get_inventory_list()
+            random.shuffle(available_items)
+            limit = int(len(available_items) / 2)
+            selected_items = [item for item in available_items[:limit] if item != ('Empty', 0)]
+            for index, item in enumerate(selected_items):
                 print(f"{index + 1}. {item}")
             if self.max_inv_size - len(self.inventory) == 0:
                 self.inventory_full()
             else:
                 print(f"\nYour inventory has {self.max_inv_size - len(self.inventory)}/{self.max_inv_size} slots available.")
-            while len(self.inventory) < self.max_inv_size and monster.inventory:
-                for index, item in enumerate(monster.inventory):
+            while len(self.inventory) < self.max_inv_size and selected_items:
+                for index, item in enumerate(selected_items):
                     add_to_inv = input(f"Would you like to add {item.name} to your inventory? (y/n): ").lower()
                     if add_to_inv == "y":
                         self.inventory.append(item)
-                        monster.inventory.remove(item)
+                        selected_items.remove(item)
                         break
                     elif add_to_inv == "n":
-                        monster.inventory.remove(item)
+                        selected_items.remove(item)
                     else:
                         print("Invalid response. Please try again!")
                 if len(self.inventory) == self.max_inv_size:
-                    if monster.inventory:
+                    if selected_items:
                         self.inventory_full()
                         choice = input("Would you like to remove an item? (y/n): ")
                         if choice == "y":
@@ -175,7 +179,7 @@ class Hero():
             if not self.inventory:
                 print("(Empty)")
             else:
-                self.get_inventory_list()
+                self.inventory_list()
             print("--------------")
             choice = input("\nWould you like to equip 'e' an item, unequip 'u' equipment, heal 'h' yourself, drop 'd' an item or quit 'q' selection? ").lower()
             if choice == 'q':
@@ -200,7 +204,7 @@ class Hero():
                 print("Nothing to remove.")
                 print("--------------\n")
                 break
-            self.get_inventory_list()
+            self.inventory_list()
             print("--------------")
             choice = input("\nEnter the number of the item you want to remove (or 'q' to quit): ")
             if choice.lower() == 'q':
@@ -218,7 +222,7 @@ class Hero():
                     print(f"Invalid entry. Please try again.")
                     print("--------------")
 
-    def get_inventory_list(self):
+    def inventory_list(self):
         self.inventory_list = []
         for index, item in enumerate(self.inventory):
             self.inventory_list.append((index, item))
