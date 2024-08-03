@@ -4,6 +4,7 @@ from shop import *
 
 locations = {
         "s": "Shop",
+        "e": "Edge of Town",
         "p": "Slime Plains",
         "g": "Goblin Forest",
         "o": "Orc Valley"
@@ -37,10 +38,9 @@ def menu_selection(hero):
             print(f"Invalid entry. Please try again.")
 
 def travel(hero):
-    loc_frmt = "|--Shop-(s)| |--Slime Plains-(p)| |--Goblin Forest-(g)| |--Orc Valley-(o)|"
-    exit = "|--Exit-(x)|"
+    loc_frmt = "|--Shop-(s)| |--Slime Plains-(p)| |--Goblin Forest-(g)| |--Orc Valley-(o)| |--Exit-(x)|"
     while True:
-        location_choice = input(f"Where would you like to go next or 'x' to exit to main menu?\n{loc_frmt}\n{exit}\n").lower()
+        location_choice = input(f"Where would you like to go next or 'x' to exit to main menu?\n{loc_frmt}\n").lower()
         if location_choice == 'x':
             break
 

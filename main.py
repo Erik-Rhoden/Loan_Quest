@@ -4,8 +4,8 @@ from hero import *
 from menu import menu_selection
 
 def main():
-    # name = opening_scene()
-    hero = Hero("Zilharr", 10, 5, 5, 3)
+    name = opening_scene()
+    hero = Hero(name, 10, 5, 5, 3)
     hero.equip_item()
     game_running = True
 

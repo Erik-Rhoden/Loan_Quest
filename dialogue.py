@@ -23,7 +23,7 @@ def opening_scene():
     time.sleep(2)
     print("The only way to make that kind of money in a week is by adventuring!")
     time.sleep(3)
-    print("*You bring yourself to the edge of town and while deciding where to go you eye a stick...*")
+    print("*You bring yourself to the Slime Plains where adventurers begin their journey. You appear hesitant but at your feet lies a stick...*")
     time.sleep(2)
     print("*You pick up the stick*")
     time.sleep(2)

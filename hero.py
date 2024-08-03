@@ -19,7 +19,7 @@ class Hero():
         self.feet = []
         self.chest = []
         self.backpack = []
-        self.location = "Shop"
+        self.location = "Slime Plains"
         self.gold = 0.0
         self.inventory = [Weapon("Stick", "Weapon", 0, 2, False)]
         self.equip_list = []
@@ -29,7 +29,7 @@ class Hero():
         self.time = 0
         self.max_time = 168
 
-    def time_logged(current_location, destination):
+    def time_logged(self, current_location, destination):
         destinations = ['Shop', 'Slime Plains', 'Goblin Forest', 'Orc Valley']
         difference = abs(destinations.index(current_location) - destinations.index(destination))
         if current_location != destination:
@@ -108,7 +108,7 @@ class Hero():
                 break
             for index, item in enumerate(self.inventory):
                 if hasattr(item, 'heal'):
-                    print(f"{index}. {item.name} - Heal: {item.heal}")
+                    print(f"{index + 1}. {item.name} - Heal: {item.heal}")
             print("--------------")
             heal_choice = input("Which potion would you like to use or 'q' to quit? ")
             if heal_choice.lower() == 'q':
@@ -140,7 +140,7 @@ class Hero():
             self.get_loot_helper(monster, [])
         elif len(monster.inventory) < 3:
             self.get_loot_helper(monster, monster.inventory)
-        elif len(monster.inventory) > 2 and monster.gold:
+        elif len(monster.inventory) >= 3:
             available_items = monster.get_inventory_list()
             random.shuffle(available_items)
             limit = round(len(available_items) / 2)
@@ -161,6 +161,7 @@ class Hero():
         for index, item in enumerate(inventory):
             print(f"{index + 1}. {item}")
         print(f"\nYour inventory has {self.max_inv_size - len(self.inventory)}/{self.max_inv_size} slots available.")
+        print("--------------")
         while len(self.inventory) < self.max_inv_size and inventory:
             for index, item in enumerate(inventory):
                 add_to_inv = input(f"Would you like to add {item.name} to your inventory? (y/n): ").lower()

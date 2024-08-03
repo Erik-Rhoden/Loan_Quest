@@ -8,7 +8,8 @@
 ### (Non-Exhaustive)
 
 1. Add random flavor text for pre-encounter
-2. Add basic manual
+2. Add weapon swap
+3. Add basic manual
 
 ## Completed
 
@@ -27,3 +28,4 @@
 * Add healing system for hero and monster
 * Add hero leveling system
 * Add equipment system for monsters
+* Add time-based losing condition
