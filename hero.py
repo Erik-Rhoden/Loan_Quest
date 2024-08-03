@@ -29,6 +29,15 @@ class Hero():
         self.time = 0
         self.max_time = 168
 
+    def time_logged(current_location, destination):
+        destinations = ['Shop', 'Slime Plains', 'Goblin Forest', 'Orc Valley']
+        difference = abs(destinations.index(current_location) - destinations.index(destination))
+        if current_location != destination:
+            time_past = difference * 0.25
+            return time_past
+        else:
+            return 0.1
+
     def deal_damage(self, target):
         damage = int(round(self.attack * (1 - target.defense / (target.defense + 50)), 0))
         if self.speed > target.speed * 3:

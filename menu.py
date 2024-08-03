@@ -47,7 +47,7 @@ def travel(hero):
         if location_choice in locations:
             current_location = hero.location
             hero.location = locations[location_choice]
-            hero.time += round(time_logged(current_location, hero.location), 1)
+            hero.time += round(hero.time_logged(current_location, hero.location), 1)
             if location_choice == 's':
                 open_shop(hero)
             else:
@@ -148,12 +148,3 @@ def open_shop(hero):
                 except ValueError:
                     print("Please enter a valid choice.")
                     print("--------------")
-
-def time_logged(current_location, destination):
-    destinations = ['Shop', 'Slime Plains', 'Goblin Forest', 'Orc Valley']
-    difference = abs(destinations.index(current_location) - destinations.index(destination))
-    if current_location != destination:
-        time_past = difference * 0.25
-        return time_past
-    else:
-        return 0.1
