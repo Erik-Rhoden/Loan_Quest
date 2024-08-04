@@ -12,7 +12,7 @@ def opening_scene():
             time.sleep(2)
             print("'YOU LOSE!' shouts the shady fellow.")
             time.sleep(2)
-            print(f"It's time you pay what you owe, {name}. That'll be 1,000 gold.")
+            print(f"It's time you pay what you owe, {name}. That'll be 10,000 gold.")
             time.sleep(2)
             answer = input("Are you ready to pay up? (y/n)\n")
             if answer == 'n':
@@ -77,3 +77,35 @@ def encounter_text(hero, monster):
                 f"You hear rustling in the nearby bush. You investigate and find a {monster.name}!",
                 f"The underbrush rustles, revealing a hidden {monster.name}. Ready for combat!"]
         return random.choice(normal_text)
+    
+def out_of_time():
+    print("You've run out of time! The Loan Shark's men are closing in!")
+    print("You have zero chance of victory...")
+    print("Game Over")
+    
+def ending_scene():
+    while True:
+        print("You've earned enough to pay back your loan!")
+        print("But you've also gained so much more...")
+        ending_choice = input("Will you pay your loan off or will you fight? (pay/fight)\n")
+        if ending_choice == "pay":
+            print("Very well. Congratulations you are a free man!")
+            return "pay"
+        elif ending_choice == "fight":
+            print("You've decided to back out of what you owe because you've slain a few goblins and orcs! Then come!")
+            return "fight"
+        else:
+            print("Please enter a valid choice.")
+
+def defeated_loan_shark():
+    print("I guess you weren't all talk *coughs up blood*")
+    time.sleep(3)
+    print("You know you're no better than me now right? You're just like the monsters you slaughtered.")
+    time.sleep(3)
+    print("Everyone will know what you've done here! My men will see to that!")
+    time.sleep(2)
+    print("You're a real piece of sh-")
+    time.sleep(2)
+    print("*You snuff out the last of the Loan Shark's life*")
+    time.sleep(3)
+    print("*You exit his establishment and head East...always East...*")
