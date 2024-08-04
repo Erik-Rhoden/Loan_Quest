@@ -164,26 +164,26 @@ class Monster():
 def monster_selection(difficulty):
     enemy_map = {1: {
                     "Green Slime": {
-                            "health": 2, 
-                            "attack": 1, 
-                            "defense": 0,
+                            "health": 3, 
+                            "attack": 2, 
+                            "defense": 3,
                             "speed": 3
                         }, 
                     "Red Slime": {
-                            "health": 3, 
-                            "attack": 1, 
-                            "defense": 1,
+                            "health": 4, 
+                            "attack": 3, 
+                            "defense": 3,
                             "speed": 3
                         },
                     "Silver Slime": {
                             "health": 5, 
-                            "attack": 2, 
-                            "defense": 2,
+                            "attack": 4, 
+                            "defense": 3,
                             "speed": 3
                         },
                     "Golden Slime": {
                             "health": 10, 
-                            "attack": 3, 
+                            "attack": 5, 
                             "defense": 3,
                             "speed": 3
                         }},
@@ -191,13 +191,13 @@ def monster_selection(difficulty):
                     "Green Goblin": {
                             "health": 7,
                             "attack": 3,
-                            "defense": 2,
+                            "defense": 3,
                             "speed": 3
                         },
                     "Red Goblin": {
                             "health": 9,
                             "attack": 3,
-                            "defense": 2,
+                            "defense": 3,
                             "speed": 3
                         },
                     "Silver Goblin": {

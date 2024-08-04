@@ -1,3 +1,5 @@
+from dialogue import encounter_text
+
 def path_difficulty(choice):
     difficulty_map = [
         {'LEVEL': 1, 'AREA': "Slime Plains"},
@@ -17,7 +19,7 @@ def path_difficulty(choice):
 
 def battle(hero, monster):
     print("--------------")
-    print(f"A {monster.name} has appeared!")
+    print(encounter_text(hero, monster))
     while hero.health > 0 and monster.health > 0:
         print(f"{hero.name}: {hero.health} HP\n{monster.name}: {monster.health} HP")
         print("--------------")
@@ -25,7 +27,6 @@ def battle(hero, monster):
             battle_result = hero_battle_options(hero, monster)
             if battle_result == 'run':
                 print("You successfully fled from battle!")
-                print("--------------")
                 return
         if monster.speed > hero.speed:
             monster.deal_damage(hero)
