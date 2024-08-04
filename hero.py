@@ -33,7 +33,7 @@ class Hero():
         destinations = ['Shop', 'Slime Plains', 'Goblin Forest', 'Orc Valley']
         difference = abs(destinations.index(current_location) - destinations.index(destination))
         if current_location != destination:
-            time_past = difference * 0.25
+            time_past = difference * 0.5
             return time_past
         else:
             return 0.1
@@ -171,6 +171,7 @@ class Hero():
                     break
                 elif add_to_inv == "n":
                     inventory.remove(item)
+                    break
                 else:
                     print("Invalid response. Please try again!")
 
